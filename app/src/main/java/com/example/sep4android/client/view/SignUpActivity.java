@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +20,7 @@ import com.example.sep4android.client.viewModel.MainViewModel;
 import com.example.sep4android.client.viewModel.SignUpVM;
 import com.example.sep4android.databinding.ActivityMainBinding;
 import com.example.sep4android.databinding.SignUpBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -29,10 +34,11 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
-//        mainViewModel= new ViewModelProvider(this).get(MainViewModel.class);
-//        binding.setMainViewModel(mainViewModel);
-//        binding.setLifecycleOwner(this);
+
+        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mainViewModel= new ViewModelProvider(this).get(MainViewModel.class);
+        binding.setMainViewModel(mainViewModel);
+        binding.setLifecycleOwner(this);
 
         signUpBinding= DataBindingUtil.setContentView(this, R.layout.sign_up);
         signUpVM= new ViewModelProvider(this).get(SignUpVM.class);

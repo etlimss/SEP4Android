@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_CurrentData"
+        android:icon="@drawable/ic_baseline_data_usage_24"
+        android:title="Current Data" />
+
+    <item
+        android:id="@+id/navigation_History"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="History" />
+
+    <item
+        android:id="@+id/navigation_Account"
+        android:icon="@drawable/ic_baseline_account_box_24"
+        android:title="Account" />
+
+</menu>

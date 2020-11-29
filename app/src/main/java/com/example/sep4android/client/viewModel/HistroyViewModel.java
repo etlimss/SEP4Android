@@ -1,0 +1,19 @@
+package com.example.sep4android.client.viewModel;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+public class HistroyViewModel extends ViewModel {
+
+    private MutableLiveData<String> mText;
+
+    public HistroyViewModel() {
+        mText = new MutableLiveData<>();
+        mText.setValue("This is dashboard fragment");
+    }
+
+    public LiveData<String> getText() {
+        return mText;
+    }
+}

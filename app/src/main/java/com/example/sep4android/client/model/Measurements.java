@@ -15,8 +15,8 @@ public class Measurements {
     private double co2;
     private boolean light;
 
-    private LocalDateTime dateTime;
-    private Device device;
+    //private LocalDateTime dateTime;
+//    private Device device;
 
     public Measurements(double temperature, double humidity, double co2) {
         this.temperature = temperature;
@@ -59,5 +59,9 @@ public class Measurements {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

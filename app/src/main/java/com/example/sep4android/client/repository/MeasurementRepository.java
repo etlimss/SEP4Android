@@ -17,8 +17,8 @@ public class MeasurementRepository {
 
 
     private MeasurementRepository(Application application){
-        MeasurementsDatabase measurementsDatabase= MeasurementsDatabase.getInstance(application);
-        measurementsDao= measurementsDatabase.measurementsDao();
+        SEP4Database sep4Database= SEP4Database.getInstance(application);
+        measurementsDao= sep4Database.measurementsDao();
         allMeasurements= measurementsDao.getAllMeasurements();
     }
 

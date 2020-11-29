@@ -16,8 +16,8 @@ public class UserRepository {
     private static UserRepository instance;
 
     private UserRepository(Application application){
-        UserDatabase userDatabase= UserDatabase.getInstance(application);
-        userDao= userDatabase.userDao();
+        SEP4Database sep4Database= SEP4Database.getInstance(application);
+        userDao= sep4Database.userDao();
         allUsers= userDao.getAllUsers();
     }
 
@@ -28,25 +28,25 @@ public class UserRepository {
         return instance;
     }
 
-    void insert(User... users){
+   public void insert(User... users){
         new InsertAsync(userDao).execute(users);
     }
 
-    void update(User... users){
+    public void update(User... users){
         new UpdateAsync(userDao).execute(users);
     }
 
 
-    void delete(User... users){
+    public void delete(User... users){
         new DeleteAsync(userDao).execute(users);
     }
 
 
-    void deleteAllUsers(){
+    public void deleteAllUsers(){
         new DeleteAllUsersAsync(userDao).execute();
     }
 
-    LiveData<List<User>> getAllUsers(){
+    public LiveData<List<User>> getAllUsers(){
         return allUsers;
     }
 

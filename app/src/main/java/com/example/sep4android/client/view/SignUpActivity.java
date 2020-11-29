@@ -19,7 +19,7 @@ import com.example.sep4android.databinding.SignUpBinding;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     MainViewModel mainViewModel;
     ActivityMainBinding binding;
 

@@ -42,8 +42,13 @@ public class MainActivity extends AppCompatActivity {
         signUpVM.getAllUsers().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
-                System.out.println(users.get(0));
-                signUpVM.oneUser.setValue(users.get(0).toString());
+                if (users.isEmpty()){
+                    signUpBinding.textView4.setText("user data will be shown here");
+                }else {
+                    System.out.println(users.get(0));
+                    signUpVM.oneUser.setValue(users.get(0).toString());
+                }
+
             }
         });
 

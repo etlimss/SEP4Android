@@ -10,7 +10,7 @@ public class HistroyViewModel extends ViewModel {
 
     public HistroyViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is history fragment");
     }
 
     public LiveData<String> getText() {

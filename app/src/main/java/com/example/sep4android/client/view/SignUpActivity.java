@@ -9,10 +9,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.sep4android.R;
 import com.example.sep4android.client.model.User;
@@ -25,8 +27,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity {
-    MainViewModel mainViewModel;
-    ActivityMainBinding binding;
 
     SignUpBinding signUpBinding;
     SignUpVM signUpVM;
@@ -34,12 +34,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mainViewModel= new ViewModelProvider(this).get(MainViewModel.class);
-        binding.setMainViewModel(mainViewModel);
-        binding.setLifecycleOwner(this);
-
         signUpBinding= DataBindingUtil.setContentView(this, R.layout.sign_up);
         signUpVM= new ViewModelProvider(this).get(SignUpVM.class);
         signUpBinding.setSignUpVM(signUpVM);
@@ -58,38 +52,50 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-       signUpBinding.usernameText.addTextChangedListener(new TextWatcher() {
-           @Override
-           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        listenInput();
 
-           }
+    }
 
-           @Override
-           public void onTextChanged(CharSequence s, int start, int before, int count) {
+    public void intentToLogin(){
+        Toast.makeText(this, "?????", Toast.LENGTH_SHORT).show();
+        Intent intent= new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
-           }
 
-           @Override
-           public void afterTextChanged(Editable s) {
+    public void listenInput(){
+        signUpBinding.usernameText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 signUpVM.getUsername().setValue(s.toString());
-           }
-       });
+            }
+        });
 
-       signUpBinding.passwordText.addTextChangedListener(new TextWatcher() {
-           @Override
-           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        signUpBinding.passwordText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-           }
+            }
 
-           @Override
-           public void onTextChanged(CharSequence s, int start, int before, int count) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-           }
+            }
 
-           @Override
-           public void afterTextChanged(Editable s) {
+            @Override
+            public void afterTextChanged(Editable s) {
                 signUpVM.getPassword().setValue(s.toString());
-           }
-       });
+            }
+        });
     }
 }

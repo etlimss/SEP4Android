@@ -12,6 +12,7 @@ import java.util.List;
 public class UserRepository {
     private UserDao userDao;
     private LiveData<List<User>> allUsers;
+    private LiveData<User> userLiveData;
 
     private static UserRepository instance;
 
@@ -49,6 +50,12 @@ public class UserRepository {
     public LiveData<List<User>> getAllUsers(){
         return allUsers;
     }
+
+    public LiveData<User> getUserLiveData(String username, String password){
+        userLiveData= userDao.getUser(username, password);
+        return userLiveData;}
+
+
 
     private class InsertAsync extends AsyncTask<User, Void, Void>{
         private UserDao userDao;

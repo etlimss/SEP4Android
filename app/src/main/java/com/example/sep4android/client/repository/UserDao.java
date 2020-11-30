@@ -28,4 +28,7 @@ public interface UserDao {
 
     @Query("select * from Account order by ID DESC")
     LiveData<List<User>> getAllUsers();
+
+    @Query("select * from Account where username like :username and password like :password")
+    LiveData<User> getUser(String username, String password);
 }

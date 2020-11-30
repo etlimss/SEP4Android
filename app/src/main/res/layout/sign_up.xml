@@ -8,6 +8,10 @@
             name="signUpVM"
             type="com.example.sep4android.client.viewModel.SignUpVM" />
 
+        <variable
+            name="signUpActivity"
+            type="com.example.sep4android.client.view.SignUpActivity" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,15 +64,15 @@
             android:id="@+id/signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{()->signUpVM.signUpAccount()}"
+            android:onClick="@{()->signUpActivity.intentToLogin()}"
             android:text="Sign Up"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.477"
+            app:layout_constraintHorizontal_bias="0.064"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.575" />
+            app:layout_constraintVertical_bias="0.587" />
 
         <TextView
             android:id="@+id/textView4"
@@ -83,5 +87,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.715" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textSize="36sp"
+            android:onClick="@{()->signUpActivity.intentToLogin()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.848"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.585" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

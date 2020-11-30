@@ -36,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         signUpBinding= DataBindingUtil.setContentView(this, R.layout.sign_up);
         signUpVM= new ViewModelProvider(this).get(SignUpVM.class);
+        signUpBinding.setSignUpActivity(this);
         signUpBinding.setSignUpVM(signUpVM);
         signUpBinding.setLifecycleOwner(this);
 
@@ -57,7 +58,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void intentToLogin(){
-        Toast.makeText(this, "?????", Toast.LENGTH_SHORT).show();
         Intent intent= new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

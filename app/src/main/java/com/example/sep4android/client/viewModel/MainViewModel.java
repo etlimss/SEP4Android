@@ -18,6 +18,9 @@ public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<Measurements> measureData= new MutableLiveData<>() ;
     private MeasurementRepository measurementRepository;
 
+
+
+
     public MainViewModel(@NonNull Application application) {
         super(application);
         measurementRepository= MeasurementRepository.getInstance(application);

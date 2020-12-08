@@ -15,10 +15,10 @@ public interface Client {
     @POST
     Call<String> setUser(String username, String password);
 
-    @GET
+    @GET("/current?location=front")
     Call<Measurements> getMeasurements();
 
-    @GET("/current")
+    @GET("/current?location=front")
     Call<Current> getCurrent();
 
 

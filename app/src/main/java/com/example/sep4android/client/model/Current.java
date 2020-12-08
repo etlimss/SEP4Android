@@ -6,6 +6,19 @@ public class Current {
     private double humidity;
     private double co2;
     private boolean light;
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Current(String location) {
+        this.location = location;
+    }
 
     public Long getId() {
         return id;
@@ -45,5 +58,17 @@ public class Current {
 
     public void setLight(boolean light) {
         this.light = light;
+    }
+
+    @Override
+    public String toString() {
+        return "Current{" +
+                "id=" + id +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
+                ", co2=" + co2 +
+                ", light=" + light +
+                ", location='" + location + '\'' +
+                '}';
     }
 }

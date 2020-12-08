@@ -32,4 +32,8 @@ public class CurrentDataViewModel extends AndroidViewModel {
         clientRepository.getCurrentFromServer();
     }
 
+    public void getMeasurements(){
+        clientRepository.getMeasurements();
+    }
+
 }

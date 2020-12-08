@@ -52,4 +52,9 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public String showTest(){
+        String s= "Congratulation! you have successful signed up, your id is "+id+"and your username is"+ username;
+        return s;
+    }
 }

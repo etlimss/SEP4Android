@@ -64,4 +64,16 @@ public class Measurements {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Measurements{" +
+                "id=" + id +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
+                ", co2=" + co2 +
+                ", light=" + light +
+                '}';
+    }
+
 }

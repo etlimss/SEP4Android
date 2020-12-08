@@ -1,5 +1,6 @@
 package com.example.sep4android.networking;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
@@ -17,7 +18,7 @@ public class ClientRepository {
     private static ClientRepository instance;
     private static Client client;
     private MutableLiveData<User> user;
-    private MutableLiveData<Measurements> measurements;
+    private MutableLiveData<Measurements> measurements= new MutableLiveData<>();
     private static MutableLiveData<Current> currentMutableLiveData;
 
     public static synchronized ClientRepository getInstance(){
@@ -57,11 +58,12 @@ public class ClientRepository {
             @Override
             public void onResponse(Call<Measurements> call, Response<Measurements> response) {
                 measurements.setValue(response.body());
+                Log.e("measurement", response.body().toString());
             }
 
             @Override
             public void onFailure(Call<Measurements> call, Throwable t) {
-
+                Log.e("measurement", "error");
             }
         });
     }
@@ -72,6 +74,7 @@ public class ClientRepository {
             @Override
             public void onResponse(Call<Current> call, Response<Current> response) {
                 currentMutableLiveData.setValue(response.body());
+                Log.e("current", response.body().toString());
             }
 
             @Override

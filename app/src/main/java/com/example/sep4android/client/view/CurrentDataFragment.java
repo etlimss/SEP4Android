@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sep4android.R;
-import com.example.sep4android.client.model.Current;
 import com.example.sep4android.client.viewModel.CurrentDataViewModel;
 import com.example.sep4android.databinding.FragmentCurrentdataBinding;
 
@@ -41,8 +40,7 @@ public class CurrentDataFragment extends Fragment implements AdapterView.OnItemS
         View root= binding.getRoot();
         binding.setCurrentDataViewModel(currentDataViewModel);
         binding.setLifecycleOwner(this);
-        currentDataViewModel.getCurrentFromServer();
-        currentDataViewModel.getMeasurements();
+        currentDataViewModel.getMeasurementsFromServer();
         spinner = (Spinner)root.findViewById(R.id.location);
         initSpinner();
 

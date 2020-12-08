@@ -1,6 +1,5 @@
 package com.example.sep4android.networking;
 
-import com.example.sep4android.client.model.Current;
 import com.example.sep4android.client.model.Measurements;
 import com.example.sep4android.client.model.User;
 
@@ -17,9 +16,5 @@ public interface Client {
 
     @GET("/current?location=front")
     Call<Measurements> getMeasurements();
-
-    @GET("/current?location=front")
-    Call<Current> getCurrent();
-
 
 }

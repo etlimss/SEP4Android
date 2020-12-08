@@ -22,8 +22,8 @@ public class CurrentDataViewModel extends AndroidViewModel {
         return clientRepository.getMeasurements();
     }
 
-    public void getMeasurementsFromServer(){
-        clientRepository.getMeasurementsFromServer();
+    public void getMeasurementsFromServer(String location){
+        clientRepository.getMeasurementsFromServer(location);
     }
 
 }

@@ -51,8 +51,8 @@ public class ClientRepository {
         });
     }
 
-    public void getMeasurementsFromServer(){
-        Call<Measurements> call= client.getMeasurements();
+    public void getMeasurementsFromServer(String location){
+        Call<Measurements> call= client.getMeasurements(location);
         call.enqueue(new Callback<Measurements>() {
             @Override
             public void onResponse(Call<Measurements> call, Response<Measurements> response) {

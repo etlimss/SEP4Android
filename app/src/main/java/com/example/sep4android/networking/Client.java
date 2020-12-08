@@ -6,6 +6,8 @@ import com.example.sep4android.client.model.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface Client {
     @GET
@@ -14,7 +16,7 @@ public interface Client {
     @POST
     Call<String> setUser(String username, String password);
 
-    @GET("/current?location=front")
-    Call<Measurements> getMeasurements();
+    @GET("/current")
+    Call<Measurements> getMeasurements(@Query("location") String location);
 
 }

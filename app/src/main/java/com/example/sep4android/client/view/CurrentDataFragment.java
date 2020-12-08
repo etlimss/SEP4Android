@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -40,7 +41,9 @@ public class CurrentDataFragment extends Fragment implements AdapterView.OnItemS
         View root= binding.getRoot();
         binding.setCurrentDataViewModel(currentDataViewModel);
         binding.setLifecycleOwner(this);
-        currentDataViewModel.getMeasurementsFromServer();
+
+//        currentDataViewModel.getMeasurementsFromServer("front");
+
         spinner = (Spinner)root.findViewById(R.id.location);
         initSpinner();
 
@@ -52,21 +55,40 @@ public class CurrentDataFragment extends Fragment implements AdapterView.OnItemS
     public void initSpinner(){
 
         currents = new ArrayList<String>();
-        currents.add("kamjakata");
+        currents.add("front");
         currents.add("Student Villiage");
 
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,currents);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String location= adapter.getItem(position);
+                Toast.makeText(getContext(), "The selected location is"+location, Toast.LENGTH_SHORT).show();
+                if (location== "front"){
+                    currentDataViewModel.getMeasurementsFromServer(location);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+//                currentDataViewModel.getMeasurementsFromServer("front");
+            }
+        });
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        String location= adapter.getItem(position);
+        Toast.makeText(getContext(), location, Toast.LENGTH_SHORT).show();
+        currentDataViewModel.getMeasurementsFromServer(location);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        currentDataViewModel.getMeasurementsFromServer("front");
     }
 }

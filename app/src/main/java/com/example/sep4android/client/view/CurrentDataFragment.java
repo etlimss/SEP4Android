@@ -42,10 +42,8 @@ public class CurrentDataFragment extends Fragment implements AdapterView.OnItemS
         binding.setCurrentDataViewModel(currentDataViewModel);
         binding.setLifecycleOwner(this);
 
-//        currentDataViewModel.getMeasurementsFromServer("front");
-
         spinner = (Spinner)root.findViewById(R.id.location);
-        initSpinner();
+//        initSpinner();
 
 
 

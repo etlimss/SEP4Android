@@ -8,29 +8,45 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sep4android.R;
+import com.example.sep4android.client.model.Measurements;
 import com.example.sep4android.client.viewModel.HistroyViewModel;
+import com.example.sep4android.databinding.FragmentHistroyBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryFragment extends Fragment {
 
     private HistroyViewModel dashboardViewModel;
+    private FragmentHistroyBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(HistroyViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_histroy, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        dashboardViewModel = new ViewModelProvider(this).get(HistroyViewModel.class);
+//        View root = inflater.inflate(R.layout.fragment_histroy, container, false);
+        binding= DataBindingUtil.inflate(inflater, R.layout.fragment_histroy, container, false);
+        View root= binding.getRoot();
+
+        binding.setLifecycleOwner(this);
+        binding.recycleView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+
+
+        List<Measurements> measurementsList= new ArrayList<>();
+        measurementsList.add(new Measurements(1,1,1));
+        measurementsList.add(new Measurements(2,2,2));
+        measurementsList.add(new Measurements(3,3,3));
+        measurementsList.add(new Measurements(4,4,4));
+        measurementsList.add(new Measurements(5,5,5));
+        MeasurementsAdapter adapter= new MeasurementsAdapter(measurementsList);
+        binding.recycleView.setAdapter(adapter);
+
         return root;
     }
 }

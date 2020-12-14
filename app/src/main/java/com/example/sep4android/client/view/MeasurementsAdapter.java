@@ -1,5 +1,6 @@
 package com.example.sep4android.client.view;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,5 +49,9 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
         public MeasurementViewHolder() {
             super(binding.getRoot());
         }
+    }
+
+    public void intentToDetail(){
+        
     }
 }

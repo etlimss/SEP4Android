@@ -1,5 +1,6 @@
 package com.example.sep4android.client.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,16 +36,15 @@ public class CurrentDataFragment extends Fragment implements AdapterView.OnItemS
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         currentDataViewModel =
-                new ViewModelProvider(this).get(CurrentDataViewModel.class);
+                new ViewModelProvider(getActivity()).get(CurrentDataViewModel.class);
 //        View root = inflater.inflate(R.layout.fragment_currentdata, container, false);
         binding= DataBindingUtil.inflate(inflater, R.layout.fragment_currentdata, container, false);
         View root= binding.getRoot();
         binding.setCurrentDataViewModel(currentDataViewModel);
-        binding.setLifecycleOwner(this);
+        binding.setLifecycleOwner(getActivity());
 
         spinner = (Spinner)root.findViewById(R.id.location);
 //        initSpinner();
-
 
 
         return root;
@@ -76,6 +76,7 @@ public class CurrentDataFragment extends Fragment implements AdapterView.OnItemS
 //                currentDataViewModel.getMeasurementsFromServer("front");
             }
         });
+
     }
 
     @Override
@@ -89,4 +90,7 @@ public class CurrentDataFragment extends Fragment implements AdapterView.OnItemS
     public void onNothingSelected(AdapterView<?> parent) {
         currentDataViewModel.getMeasurementsFromServer("front");
     }
+
+
+
 }

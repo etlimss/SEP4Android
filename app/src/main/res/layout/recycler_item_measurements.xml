@@ -5,6 +5,10 @@
         <variable
             name="measurements"
             type="com.example.sep4android.client.model.Measurements" />
+
+        <variable
+            name="measurementsAdapter"
+            type="com.example.sep4android.client.view.MeasurementsAdapter" />
     </data>
 
     <LinearLayout

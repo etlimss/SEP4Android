@@ -5,8 +5,12 @@
 
     <data>
         <variable
-            name="sealertviewmodl"
+            name="setAlertViewModel"
             type="com.example.sep4android.client.viewModel.SetAlertViewModel" />
+
+        <variable
+            name="setAlertFragment"
+            type="com.example.sep4android.client.view.SetAlertFragment" />
     </data>
 
 
@@ -125,8 +129,6 @@
             android:id="@+id/CO2Min"
             android:layout_width="55dp"
             android:layout_height="22dp"
-            android:ems="10"
-            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.3"
@@ -138,7 +140,6 @@
             android:id="@+id/CO2Max"
             android:layout_width="55dp"
             android:layout_height="22dp"
-            android:ems="10"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -160,38 +161,37 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.581" />
 
+
         <EditText
             android:id="@+id/TemperatureMin"
-            android:layout_width="55dp"
-            android:layout_height="22dp"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_width="78dp"
+            android:layout_height="37dp"
+            android:text=""
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintHorizontal_bias="0.321"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.166" />
+            app:layout_constraintVertical_bias="0.149" />
 
         <EditText
             android:id="@+id/TemperatureMax"
-            android:layout_width="55dp"
-            android:layout_height="22dp"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_width="66dp"
+            android:layout_height="37dp"
+            android:text=""
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.921"
+            app:layout_constraintHorizontal_bias="0.918"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.167" />
+            app:layout_constraintVertical_bias="0.149" />
 
         <EditText
             android:id="@+id/HumidityMin"
             android:layout_width="55dp"
             android:layout_height="22dp"
-            android:ems="10"
-            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.3"
@@ -203,8 +203,6 @@
             android:id="@+id/HumidityMax"
             android:layout_width="55dp"
             android:layout_height="22dp"
-            android:ems="10"
-            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.921"
@@ -217,6 +215,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Alert"
+            android:onClick="@{()->setAlertFragment.setAlert()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.823"

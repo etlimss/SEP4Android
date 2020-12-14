@@ -17,6 +17,13 @@
         android:label="History"
         tools:layout="History" />
 
+
+    <fragment
+        android:id="@+id/navigation_SetAlert"
+        android:name="com.example.sep4android.client.view.SetAlertFragment"
+        android:label="SetAlert"
+        tools:layout="@layout/fragment_set_alert" />
+
     <fragment
         android:id="@+id/navigation_Account"
         android:name="com.example.sep4android.client.view.AccountFragment"

@@ -28,11 +28,14 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel= new ViewModelProvider(this).get(LoginViewModel.class);
         loginBinding.setLifecycleOwner(this);
 
-        loginViewModel.getCurrentUser().observe(this, user -> {
-            if (user==null){
-                Toast.makeText(LoginActivity.this, "something wrong", Toast.LENGTH_SHORT).show();
-            }else {
-                intentToSystem();
+        loginViewModel.getCurrentUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                if (user == null) {
+                    Toast.makeText(LoginActivity.this, "something wrong", Toast.LENGTH_SHORT).show();
+                } else {
+                    LoginActivity.this.intentToSystem();
+                }
             }
         });
 

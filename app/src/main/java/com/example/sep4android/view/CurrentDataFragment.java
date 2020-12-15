@@ -43,7 +43,7 @@ public class CurrentDataFragment extends Fragment implements AdapterView.OnItemS
         binding.setLifecycleOwner(getActivity());
 
         spinner = (Spinner)root.findViewById(R.id.location);
-//        initSpinner();
+        initSpinner();
 
 
         return root;

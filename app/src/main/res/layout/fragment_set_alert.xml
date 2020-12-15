@@ -6,11 +6,11 @@
     <data>
         <variable
             name="setAlertViewModel"
-            type="com.example.sep4android.client.viewModel.SetAlertViewModel" />
+            type="com.example.sep4android.viewModel.SetAlertViewModel" />
 
         <variable
             name="setAlertFragment"
-            type="com.example.sep4android.client.view.SetAlertFragment" />
+            type="com.example.sep4android.view.SetAlertFragment" />
     </data>
 
 

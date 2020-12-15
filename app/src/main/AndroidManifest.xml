@@ -10,10 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".client.view.DetailActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true" >
+
+        <activity android:name=".view.DetailActivity"></activity>
         <activity
-            android:name=".client.view.LoginActivity"
+            android:name=".view.LoginActivity"
             android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".client.view.MainActivity"
+            android:name=".view.MainActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".client.view.SignUpActivity"
+            android:name=".view.SignUpActivity"
             android:label="SignUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

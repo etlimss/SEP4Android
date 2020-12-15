@@ -1,4 +1,4 @@
-package com.example.sep4android.client.viewModel;
+package com.example.sep4android.viewModel;
 
 import android.app.Application;
 

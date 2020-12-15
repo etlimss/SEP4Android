@@ -1,22 +1,19 @@
-package com.example.sep4android.client.view;
+package com.example.sep4android.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sep4android.R;
-import com.example.sep4android.client.model.Measurements;
-import com.example.sep4android.client.viewModel.HistroyViewModel;
+import com.example.sep4android.data.model.Measurements;
+import com.example.sep4android.viewModel.HistroyViewModel;
 import com.example.sep4android.databinding.FragmentHistroyBinding;
 
 import java.util.ArrayList;

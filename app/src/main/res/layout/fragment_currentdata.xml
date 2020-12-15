@@ -6,13 +6,13 @@
     <data>
             <variable
                 name="currentDataViewModel"
-                type="com.example.sep4android.client.viewModel.CurrentDataViewModel" />
+                type="com.example.sep4android.viewModel.CurrentDataViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".client.view.CurrentDataFragment">
+        tools:context=".view.CurrentDataFragment">
 
         <TextView
             android:id="@+id/temperature"

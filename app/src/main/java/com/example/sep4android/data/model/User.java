@@ -1,31 +1,15 @@
-package com.example.sep4android.client.model;
+package com.example.sep4android.data.model;
 
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Account")
 public class User {
-    @PrimaryKey(autoGenerate = true)
-    private Long id;
     private String username;
     private String password;
 
-    public User() {
-    }
+    public User() {}
 
-    @Ignore
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -47,14 +31,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
-    }
-
-    public String showTest(){
-        String s= "Congratulation! you have successful signed up, your id is "+id+"and your username is"+ username;
-        return s;
     }
 }

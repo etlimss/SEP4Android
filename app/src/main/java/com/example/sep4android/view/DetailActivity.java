@@ -1,4 +1,4 @@
-package com.example.sep4android.client.view;
+package com.example.sep4android.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 

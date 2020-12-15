@@ -1,8 +1,6 @@
-package com.example.sep4android.client.view;
+package com.example.sep4android.view;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,7 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sep4android.R;
-import com.example.sep4android.client.model.Measurements;
+import com.example.sep4android.data.model.Measurements;
 import com.example.sep4android.databinding.RecyclerItemMeasurementsBinding;
 
 import java.util.List;
@@ -35,7 +33,7 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MeasurementViewHolder holder, int position) {
-        binding.setMeasurements(measurementsList.get(position));
+        // binding.setMeasurements(measurementsList.get(position));
         binding.executePendingBindings();
     }
 

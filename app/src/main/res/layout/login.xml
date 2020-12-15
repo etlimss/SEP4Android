@@ -6,7 +6,11 @@
     <data>
         <variable
             name="loginActivity"
-            type="com.example.sep4android.client.view.LoginActivity" />
+            type="com.example.sep4android.view.LoginActivity" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.sep4android.viewModel.LoginViewModel" />
 
     </data>
 
@@ -19,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Username"
-            android:text=""
+            android:text="@={viewmodel.username}"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:text=""
+            android:text="@={viewmodel.password}"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

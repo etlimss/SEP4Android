@@ -1,4 +1,4 @@
-package com.example.sep4android.client.view;
+package com.example.sep4android.view;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,24 +12,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sep4android.R;
-import com.example.sep4android.client.model.Measurements;
-import com.example.sep4android.client.viewModel.MainViewModel;
-import com.example.sep4android.client.viewModel.SetAlertViewModel;
+import com.example.sep4android.data.model.Measurements;
+import com.example.sep4android.viewModel.MainViewModel;
+import com.example.sep4android.viewModel.SetAlertViewModel;
 import com.example.sep4android.databinding.FragmentCurrentdataBinding;
 import com.example.sep4android.databinding.FragmentSetAlertBinding;
 
-import retrofit2.http.PUT;
-
 import static android.content.Context.NOTIFICATION_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 
 public class SetAlertFragment extends Fragment {

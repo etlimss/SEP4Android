@@ -1,4 +1,4 @@
-package com.example.sep4android.client.viewModel;
+package com.example.sep4android.viewModel;
 
 import android.app.Application;
 
@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.sep4android.client.model.Measurements;
-import com.example.sep4android.networking.ClientRepository;
+import com.example.sep4android.data.model.Measurements;
+import com.example.sep4android.data.networking.ClientRepository;
 
 public class CurrentDataViewModel extends AndroidViewModel {
 

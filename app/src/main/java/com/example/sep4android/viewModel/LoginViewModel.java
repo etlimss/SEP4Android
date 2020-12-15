@@ -1,4 +1,4 @@
-package com.example.sep4android.client.viewModel;
+package com.example.sep4android.viewModel;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -6,18 +6,19 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.sep4android.client.model.User;
-import com.example.sep4android.client.repository.UserRepository;
+import com.example.sep4android.data.model.User;
+import com.example.sep4android.data.networking.ClientRepository;
 
 public class LoginViewModel extends AndroidViewModel {
-    private UserRepository userRepository;
+
+    private ClientRepository repo;
+
     private MutableLiveData<String> username= new MutableLiveData<>();
     private MutableLiveData<String> password= new MutableLiveData<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        userRepository= UserRepository.getInstance(application);
-
+        repo = ClientRepository.getInstance();
     }
 
     public MutableLiveData<String> getUsername() {
@@ -28,11 +29,11 @@ public class LoginViewModel extends AndroidViewModel {
         return password;
     }
 
-    public LiveData<User> loginAccount(String username, String password){
-
-         return  userRepository.getUserLiveData(username,password);
-
+    public void loginAccount() {
+        repo.loginAccount(username.getValue(), password.getValue());
     }
 
-
+    public LiveData<User> getCurrentUser() {
+        return repo.getCurrentUser();
+    }
 }

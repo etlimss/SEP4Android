@@ -1,15 +1,13 @@
-package com.example.sep4android.client.view;
+package com.example.sep4android.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.example.sep4android.R;
 
-import com.example.sep4android.client.model.Measurements;
-import com.example.sep4android.client.viewModel.CurrentDataViewModel;
-import com.example.sep4android.client.viewModel.MainViewModel;
+import com.example.sep4android.data.model.Measurements;
+import com.example.sep4android.viewModel.MainViewModel;
 import com.example.sep4android.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

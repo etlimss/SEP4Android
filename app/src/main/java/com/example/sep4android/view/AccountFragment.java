@@ -1,4 +1,4 @@
-package com.example.sep4android.client.view;
+package com.example.sep4android.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sep4android.R;
-import com.example.sep4android.client.viewModel.AccountViewModel;
+import com.example.sep4android.viewModel.AccountViewModel;
 
 public class AccountFragment extends Fragment {
 

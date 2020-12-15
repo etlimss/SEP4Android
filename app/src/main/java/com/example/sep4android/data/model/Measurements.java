@@ -1,14 +1,6 @@
-package com.example.sep4android.client.model;
+package com.example.sep4android.data.model;
 
-import androidx.annotation.IdRes;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-import java.time.LocalDateTime;
-
-@Entity
 public class Measurements {
-    @PrimaryKey(autoGenerate = true)
     private Long id;
     private double temperature;
     private double humidity;

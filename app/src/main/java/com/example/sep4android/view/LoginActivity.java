@@ -1,9 +1,7 @@
-package com.example.sep4android.client.view;
+package com.example.sep4android.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,8 +12,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sep4android.R;
-import com.example.sep4android.client.model.User;
-import com.example.sep4android.client.viewModel.LoginViewModel;
+import com.example.sep4android.data.model.User;
+import com.example.sep4android.viewModel.LoginViewModel;
 import com.example.sep4android.databinding.LoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,11 +23,18 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginBinding= DataBindingUtil.setContentView(this, R.layout.login);
+        loginBinding = DataBindingUtil.setContentView(this, R.layout.login);
         loginBinding.setLoginActivity(this);
         loginViewModel= new ViewModelProvider(this).get(LoginViewModel.class);
         loginBinding.setLifecycleOwner(this);
 
+        loginViewModel.getCurrentUser().observe(this, user -> {
+            if (user==null){
+                Toast.makeText(LoginActivity.this, "something wrong", Toast.LENGTH_SHORT).show();
+            }else {
+                intentToSystem();
+            }
+        });
 
     }
 
@@ -44,21 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginAccount(){
-
-        String username= loginBinding.usernameText.getText().toString();
-        String password= loginBinding.passwordText.getText().toString();
-        LiveData<User> userLiveData= loginViewModel.loginAccount(username, password);
-        userLiveData.observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                if (user==null){
-                    Toast.makeText(LoginActivity.this, "something wrong", Toast.LENGTH_SHORT).show();
-                }else {
-                    intentToSystem();
-                }
-            }
-        });
-
+        loginViewModel.loginAccount();
     }
 
 

@@ -128,30 +128,29 @@
 
         <EditText
             android:id="@+id/CO2Min"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
+            android:layout_width="89dp"
+            android:layout_height="42dp"
             android:text=""
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.37"
+            app:layout_constraintHorizontal_bias="0.357"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.572" />
-
+            app:layout_constraintVertical_bias="0.58" />
 
         <EditText
             android:id="@+id/CO2Max"
-            android:layout_width="108dp"
-            android:layout_height="52dp"
+            android:layout_width="89dp"
+            android:layout_height="42dp"
             android:text=""
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.986"
+            app:layout_constraintHorizontal_bias="0.953"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.574" />
+            app:layout_constraintVertical_bias="0.593" />
 
         <TextView
             android:id="@+id/TextView14"

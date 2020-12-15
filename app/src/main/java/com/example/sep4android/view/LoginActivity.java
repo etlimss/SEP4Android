@@ -23,9 +23,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
         loginBinding = DataBindingUtil.setContentView(this, R.layout.login);
         loginBinding.setLoginActivity(this);
-        loginViewModel= new ViewModelProvider(this).get(LoginViewModel.class);
+        loginBinding.setViewmodel(loginViewModel);
         loginBinding.setLifecycleOwner(this);
 
         loginViewModel.getCurrentUser().observe(this, user -> {
@@ -35,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
                 intentToSystem();
             }
         });
-
     }
 
     public void intentToSignUp(){

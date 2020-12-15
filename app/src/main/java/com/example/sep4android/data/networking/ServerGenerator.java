@@ -1,5 +1,6 @@
 package com.example.sep4android.data.networking;
 
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

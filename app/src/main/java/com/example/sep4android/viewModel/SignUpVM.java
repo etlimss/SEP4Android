@@ -23,6 +23,12 @@ public class SignUpVM extends AndroidViewModel {
         repo = ClientRepository.getInstance();
     }
 
+    public SignUpVM(@NonNull Application application, ClientRepository repo) {
+        super(application);
+
+        this.repo = repo;
+    }
+
     public LiveData<User> getUser() {
         return repo.getCurrentUser();
     }

@@ -21,6 +21,11 @@ public class LoginViewModel extends AndroidViewModel {
         repo = ClientRepository.getInstance();
     }
 
+    public LoginViewModel(@NonNull Application application, ClientRepository repo) {
+        super(application);
+        this.repo = repo;
+    }
+
     public MutableLiveData<String> getUsername() {
         return username;
     }

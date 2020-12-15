@@ -58,14 +58,11 @@ public class ClientRepository {
     public void loginAccount(String username, String password) {
         final User u = new User(username, password);
 
-        System.out.println(u);
-
         Call<Boolean> userCall= client.getUser(u);
         userCall.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 user.setValue(response.isSuccessful() ? u : null);
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + response.code());
             }
 
             @Override

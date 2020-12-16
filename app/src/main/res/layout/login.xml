@@ -1,78 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="loginActivity"
-            type="com.example.sep4android.view.LoginActivity" />
-
-        <variable
-            name="viewmodel"
-            type="com.example.sep4android.viewModel.LoginViewModel" />
-
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="148dp"
+        android:layout_weight="0"
+        android:fontFamily="casual"
+        android:paddingTop="50dp"
+        android:text="Welcome to the smart green application!"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/usernameText"
-            android:layout_width="wrap_content"
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:id="@+id/viewPager">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/login_createTab"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
-            android:text="@={viewmodel.username}"
-            android:textSize="36sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.458"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.182" />
+            app:tabMode="fixed" />
+    </androidx.viewpager.widget.ViewPager>
 
-        <EditText
-            android:id="@+id/passwordText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:text="@={viewmodel.password}"
-            android:textSize="36sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.467"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.397" />
-
-        <Button
-            android:id="@+id/signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{()->loginActivity.intentToSignUp()}"
-            android:text="Sign Up"
-            android:textSize="36sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.935"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.709" />
-
-        <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:textSize="36sp"
-            android:onClick="@{()->loginActivity.loginAccount()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.065"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.709" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</LinearLayout>

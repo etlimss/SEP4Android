@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.sep4android.data.model.Measurements;
 import com.example.sep4android.data.model.User;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,39 +39,41 @@ public class ClientRepository {
     }
 
     public void signUpAccount(String username, String password){
-        final User u = new User(username, password);
-
-        Call<Long> userCall = client.createAccount(u);
+        Client clientAPI = ServerGenerator.getClient();
+        Call<Long> userCall = clientAPI.createAccount(new User(username,password));
         userCall.enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
-                user.setValue(response.body() != 400 ? u : null);
+                if (response.isSuccessful()) {
+                    Log.i("Retrofit", "Account has been created!");
+                }
             }
-
             @Override
             public void onFailure(Call<Long> call, Throwable t) {
-                user.setValue(null);
-                throw new RuntimeException(t);
+                Log.i("Retrofit", "Something went wrong :(");
             }
         });
-
     }
 
     public void loginAccount(String username, String password) {
-        final User u = new User(username, password);
-
-        Call<Boolean> userCall= client.getUser(u);
-        userCall.enqueue(new Callback<Boolean>() {
+        Log.i("Retrofit","I WAS CALLED!");
+        Client clientAPI = ServerGenerator.getClient();
+        Call<User> call = clientAPI.getUser(new User(username,password));
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                user.setValue(response.isSuccessful() ? u : null);
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Log.i("Retrofit", "We have been successfully logged in!");
+                    if (response.body() != null) {
+                        user.setValue(response.body());
+                    }
+                }
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                user.setValue(null);
-
-                throw new RuntimeException(t);
+            public void onFailure(Call<User> call, Throwable t) {
+                user = null;
+                Log.i("Retrofit", Objects.requireNonNull(t.getMessage()));
             }
         });
     }

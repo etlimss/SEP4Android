@@ -15,7 +15,7 @@ public interface Client {
     Call<Measurements> getMeasurements(@Query("location") String location);
 
     @POST("/login")
-    Call<Boolean> getUser(@Body User user);
+    Call<User> getUser(@Body User user);
 
     @POST("/createAccount")
     Call<Long> createAccount(@Body User user);

@@ -78,6 +78,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="10sp"
                 android:text="Temperature"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
@@ -85,7 +86,7 @@
 
             <ImageView
                 android:layout_width="100dp"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/temperature" />
 
@@ -93,6 +94,7 @@
                 android:id="@+id/temperatureData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="10sp"
                 android:text="@{String.valueOf(currentDataViewModel.measurementsMutableLiveData.temperature)}"
                 android:textAlignment="center"
                 android:textSize="20sp" />
@@ -122,6 +124,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="10sp"
                     android:text="Humidity"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
@@ -129,7 +132,7 @@
 
                 <ImageView
                     android:layout_width="100dp"
-                    android:layout_height="120dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/humidity" />
 
@@ -137,6 +140,7 @@
                     android:id="@+id/humidityData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10sp"
                     android:text="@{String.valueOf(currentDataViewModel.measurementsMutableLiveData.humidity)}"
                     android:textAlignment="center"
                     android:textSize="20sp" />
@@ -166,14 +170,15 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="10sp"
                     android:text="Co2"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:layout_width="100dp"
-                    android:layout_height="120dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/co2" />
 
@@ -181,6 +186,7 @@
                     android:id="@+id/co2Data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10sp"
                     android:text="@{String.valueOf(currentDataViewModel.measurementsMutableLiveData.co2)}"
                     android:textAlignment="center"
                     android:textSize="20sp" />
@@ -210,14 +216,15 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="10sp"
                     android:text="Light"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:layout_width="100dp"
-                    android:layout_height="120dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/light" />
 
@@ -225,6 +232,7 @@
                     android:id="@+id/lightData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10sp"
                     android:text="@{String.valueOf(currentDataViewModel.measurementsMutableLiveData.light)}"
                     android:textAlignment="center"
                     android:textSize="20sp" />

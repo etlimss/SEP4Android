@@ -7,6 +7,9 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.sep4android.data.AlertModels.Co2Alert;
+import com.example.sep4android.data.AlertModels.HumidityAlert;
+import com.example.sep4android.data.AlertModels.TemperatureAlert;
 import com.example.sep4android.data.model.AlertValue;
 
 
@@ -14,14 +17,40 @@ import com.example.sep4android.data.model.AlertValue;
 public interface AlertValueDao {
 
     @Insert
-    void insert(AlertValue... alertValues);
+    void insertTemperatureAlert(TemperatureAlert temperatureAlert);
+
+    @Insert
+    void insertHumidityAlert(HumidityAlert humidityAlert);
+
+    @Insert
+    void insertCo2Alert(Co2Alert co2Alert);
+
+    @Insert
+    void updateTemperatureAlert(TemperatureAlert temperatureAlert);
 
     @Update
-    void update(AlertValue... alertValues);
+    void updateCo2Alert(Co2Alert co2Alert);
+
+    @Update
+    void updateHumidityAlert(HumidityAlert humidityAlert);
+
 
     @Delete
-    void delete(AlertValue... alertValues);
+    void deleteTemperatureAlert(TemperatureAlert temperatureAlert);
 
-    @Query("select * from AlertValue where userId like :userId ")
-    LiveData<AlertValue> getAlertValue(long userId);
+    @Delete
+    void deleteCo2Alert(Co2Alert co2Alert);
+
+    @Delete
+    void deleteHumidityAlert(HumidityAlert humidityAlert);
+
+    @Query("select * from Co2Alert where userId = :userId ")
+    LiveData<Co2Alert> getCo2AlertValue(long userId);
+
+    @Query("select * from TemperatureAlert where userId = :userId ")
+    LiveData<TemperatureAlert> getTemperatureAlertValue(long userId);
+
+    @Query("select * from HumidityAlert where userId = :userId ")
+    LiveData<HumidityAlert> getHumidityAlertValue(long userId);
+
 }

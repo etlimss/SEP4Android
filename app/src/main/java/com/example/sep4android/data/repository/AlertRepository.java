@@ -1,22 +1,25 @@
 package com.example.sep4android.data.repository;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.sep4android.data.AlertModels.Co2Alert;
+import com.example.sep4android.data.AlertModels.HumidityAlert;
+import com.example.sep4android.data.AlertModels.TemperatureAlert;
 import com.example.sep4android.data.model.AlertValue;
 
 
 public class AlertRepository {
     private AlertValueDao alertValueDao;
     private LiveData<AlertValue> alertValueLiveData;
+    private SEP4Database sep4Database;
 
     private static AlertRepository instance;
 
     public AlertRepository(Application application) {
 
-        SEP4Database sep4Database= SEP4Database.getInstance(application);
+        sep4Database= SEP4Database.getInstance(application);
         alertValueDao= sep4Database.alertValueDao();
     }
 
@@ -28,49 +31,70 @@ public class AlertRepository {
     }
 
 
-    public LiveData<AlertValue> getAlertValueLiveData(long userId) {
-        alertValueLiveData= alertValueDao.getAlertValue(userId);
-        return alertValueLiveData;
+    /*
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+                               LOCAL DATABASE STUFF
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+        ------------------------------------------------------------------
+     */
+    //  Temperature Alerts/Get/Update/Insert
+    // GETTING THE ALERT INFO!!!!!!!!!!!!!!!!!!!!!
+    public LiveData<TemperatureAlert> getTemperatureAlert(long userId) {
+        return sep4Database.alertValueDao().getTemperatureAlertValue(userId);
+    }
+    //  Temperature Alerts/Get/Update/Insert
+    public LiveData<HumidityAlert> getHumidityAlert(long userId) {
+        return sep4Database.alertValueDao().getHumidityAlertValue(userId);
+    }
+    //  Temperature Alerts/Get/Update/Insert
+    public LiveData<Co2Alert> getCo2Alert(long userId) {
+        return sep4Database.alertValueDao().getCo2AlertValue(userId);
+    }
+
+    // ADDING ALERTS TO THE DATABASE !!!!!!!!!!!!!!!!!!!!!
+    public void addTemperatureAlert(TemperatureAlert temperatureAlert)
+    {
+        sep4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().insertTemperatureAlert(temperatureAlert));
+    }
+
+    public void addCo2Alert(Co2Alert co2Alert)
+    {
+        sep4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().insertCo2Alert(co2Alert));
+    }
+
+    public void addHumidityAlert(HumidityAlert humidityAlert)
+    {
+        sep4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().insertHumidityAlert(humidityAlert));
     }
 
 
-
-    public void insert(AlertValue... alertValues){
-        new InsertAsync(alertValueDao).execute(alertValues);
+    /* REMOVING METHODS FOR THE ALERTS!!!!!!!!!!!!!!!!!!!!!!! */
+    public void removeTemperatureAlert(TemperatureAlert temperatureAlert) {
+        SEP4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().deleteTemperatureAlert(temperatureAlert));
     }
 
-    public void update(AlertValue... alertValues){
-        new UpdateAsync(alertValueDao).execute(alertValues);
+    public void removeHumidityAlert(HumidityAlert humidityAlert) {
+        SEP4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().deleteHumidityAlert(humidityAlert));
     }
 
-
-    private class InsertAsync extends AsyncTask<AlertValue, Void, Void>{
-
-        private AlertValueDao alertValueDao;
-
-        public InsertAsync(AlertValueDao alertValueDao) {
-            this.alertValueDao = alertValueDao;
-        }
-
-        @Override
-        protected Void doInBackground(AlertValue... alertValues) {
-            alertValueDao.insert(alertValues);
-            return null;
-        }
-    }
-
-    private class UpdateAsync extends AsyncTask<AlertValue, Void, Void>{
-
-        private AlertValueDao alertValueDao;
-
-        public UpdateAsync(AlertValueDao alertValueDao) {
-            this.alertValueDao = alertValueDao;
-        }
-
-        @Override
-        protected Void doInBackground(AlertValue... alertValues) {
-            alertValueDao.update(alertValues);
-            return null;
-        }
+    public void removeCo2Alert(Co2Alert co2Alert) {
+        SEP4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().deleteCo2Alert(co2Alert));
     }
 }

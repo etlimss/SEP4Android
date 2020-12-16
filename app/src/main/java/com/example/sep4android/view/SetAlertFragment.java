@@ -5,6 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,16 +15,13 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.sep4android.R;
 import com.example.sep4android.data.model.Measurements;
+import com.example.sep4android.databinding.FragmentSetAlertBinding;
 import com.example.sep4android.viewModel.MainViewModel;
 import com.example.sep4android.viewModel.SetAlertViewModel;
-import com.example.sep4android.databinding.FragmentCurrentdataBinding;
-import com.example.sep4android.databinding.FragmentSetAlertBinding;
+
+import java.util.Objects;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -117,7 +117,7 @@ public class SetAlertFragment extends Fragment {
 
 
     public void createNotification(String contentText){
-        NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) Objects.requireNonNull(getActivity()).getSystemService(NOTIFICATION_SERVICE);
 
         Notification.Builder builder = new Notification.Builder(getContext());
 

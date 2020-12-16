@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 public interface Client {
 
     @GET("/current")
-    Call<Measurements> getMeasurements(@Query("location") String location);
+    Call<Measurements> getMeasurements(@Query(value="location" , encoded=true) String location);
 
     @POST("/login")
     Call<User> getUser(@Body User user);

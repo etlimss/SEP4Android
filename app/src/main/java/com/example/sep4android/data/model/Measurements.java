@@ -1,7 +1,6 @@
 package com.example.sep4android.data.model;
 
 public class Measurements {
-    private Long id;
     private double temperature;
     private double humidity;
     private double co2;
@@ -49,18 +48,9 @@ public class Measurements {
         this.light = light;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "Measurements{" +
-                "id=" + id +
                 ", temperature=" + temperature +
                 ", humidity=" + humidity +
                 ", co2=" + co2 +

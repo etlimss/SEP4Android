@@ -85,8 +85,8 @@ public class ClientRepository {
             public void onResponse(Call<Measurements> call, Response<Measurements> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
+                        Log.i("Measure", response.body().toString());
                         measurements.setValue(response.body());
-                        Log.e("measurement", response.body().toString());
                     }
                 }
             }

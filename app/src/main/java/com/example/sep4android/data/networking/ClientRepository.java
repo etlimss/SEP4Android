@@ -20,7 +20,6 @@ public class ClientRepository {
     private  MutableLiveData<User> user;
     private  MutableLiveData<Measurements> measurements;
 
-
     private ClientRepository() {
         measurements= new MutableLiveData<>();
         user = new MutableLiveData<>();
@@ -79,12 +78,17 @@ public class ClientRepository {
     }
 
     public void getMeasurementsFromServer(String location){
-        Call<Measurements> call= client.getMeasurements(location);
+        Client clientAPI = ServerGenerator.getClient();
+        Call<Measurements> call= clientAPI.getMeasurements(location);
         call.enqueue(new Callback<Measurements>() {
             @Override
             public void onResponse(Call<Measurements> call, Response<Measurements> response) {
-                measurements.setValue(response.body());
-                Log.e("measurement", response.body().toString());
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        measurements.setValue(response.body());
+                        Log.e("measurement", response.body().toString());
+                    }
+                }
             }
 
             @Override
@@ -94,7 +98,7 @@ public class ClientRepository {
         });
     }
 
-    public MutableLiveData<Measurements> getMeasurements() {
+    public LiveData<Measurements> getMeasurements() {
         return measurements;
     }
 }

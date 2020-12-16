@@ -15,7 +15,7 @@
 
         <activity android:name=".view.DetailActivity"></activity>
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.Login.LoginActivity"
             android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.Login.LoginActivity"
+            android:name=".view.MainActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,15 +33,6 @@
 <!--                <category android:name="android.intent.category.DEFAULT" />-->
             </intent-filter>
         </activity>
-<!--        <activity-->
-<!--            android:name=".view.Login.SignUpActivity"-->
-<!--            android:label="SignUp">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
     </application>
 
 </manifest>

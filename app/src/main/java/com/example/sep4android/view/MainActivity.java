@@ -57,7 +57,5 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("message",s);
         SetAlertFragment setAlertFragment= new SetAlertFragment();
         setAlertFragment.setArguments(bundle);
-
-
     }
 }

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.sep4android.data.model.Measurements;
@@ -18,7 +19,7 @@ public class CurrentDataViewModel extends AndroidViewModel {
         clientRepository= ClientRepository.getInstance();
     }
 
-    public MutableLiveData<Measurements> getMeasurementsMutableLiveData() {
+    public LiveData<Measurements> getMeasurementsMutableLiveData() {
         return clientRepository.getMeasurements();
     }
 

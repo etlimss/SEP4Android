@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -23,6 +27,10 @@ public class HistoryFragment extends Fragment {
 
     private HistroyViewModel dashboardViewModel;
     private FragmentHistroyBinding binding;
+
+    Spinner locationInHistory;
+    List<String> chooseLocation;
+    ArrayAdapter<String> adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +52,34 @@ public class HistoryFragment extends Fragment {
         MeasurementsAdapter adapter= new MeasurementsAdapter(measurementsList);
         binding.recycleView.setAdapter(adapter);
 
+        locationInHistory = (Spinner)root.findViewById(R.id.locationInHistory);
+        initSpinner();
+
         return root;
+    }
+
+
+
+    public void initSpinner(){
+
+        chooseLocation = new ArrayList<>();
+        chooseLocation.add("front");
+        chooseLocation.add("back");
+
+        adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,chooseLocation);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationInHistory.setAdapter(adapter);
+        locationInHistory.setSelection(0);
+        locationInHistory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), "The selected location is " + adapter.getItem(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
     }
 }

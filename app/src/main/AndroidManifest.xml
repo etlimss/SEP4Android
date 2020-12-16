@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
 
-        <activity android:name=".view.DetailActivity"></activity>
         <activity
             android:name=".view.Login.LoginActivity"
             android:label="Login">

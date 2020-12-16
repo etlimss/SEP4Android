@@ -42,12 +42,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        TextView temperatureData= findViewById(R.id.temperatureData);
-        String s= temperatureData.getText().toString();
-        Log.e("wjj", s);
-        Bundle bundle=new Bundle();
-        bundle.putString("message",s);
-        SetAlertFragment setAlertFragment= new SetAlertFragment();
-        setAlertFragment.setArguments(bundle);
     }
 }

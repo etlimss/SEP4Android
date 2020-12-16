@@ -5,29 +5,32 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sep4android.R;
+
+import com.example.sep4android.data.model.AlertValue;
 import com.example.sep4android.data.model.Measurements;
 import com.example.sep4android.databinding.FragmentSetAlertBinding;
 import com.example.sep4android.viewModel.MainViewModel;
 import com.example.sep4android.viewModel.SetAlertViewModel;
 
-import java.util.Objects;
-
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 
 public class SetAlertFragment extends Fragment {
-    private SetAlertViewModel setAlertViewModel;
     private FragmentSetAlertBinding binding;
     private String cO2Min;
     private String cO2Max;
@@ -42,24 +45,32 @@ public class SetAlertFragment extends Fragment {
 
     MainViewModel mainViewModel;
 
+    SetAlertViewModel setAlertViewModel;
+
+    AlertValue aV;
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        setAlertViewModel = new ViewModelProvider(this).get(SetAlertViewModel.class);
+
         binding= DataBindingUtil.inflate(inflater, R.layout.fragment_set_alert, container, false);
-        binding.setSetAlertFragment(this);
-        binding.setLifecycleOwner(this);
         View root= binding.getRoot();
         mainViewModel= new ViewModelProvider(getActivity()).get(MainViewModel.class);
         binding.setLifecycleOwner(getActivity());
 
+        setAlertViewModel= new ViewModelProvider(this).get(SetAlertViewModel.class);
+        binding.setSetAlertViewModel(setAlertViewModel);
+        binding.setSetAlertFragment(this);
+
+        initSetting();
         return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
 
 
     }
@@ -74,16 +85,87 @@ public class SetAlertFragment extends Fragment {
         humidityMin= binding.HumidityMin.getText().toString();
         humidityMax= binding.HumidityMax.getText().toString();
 
-        tMin= Double.parseDouble(temperatureMin);
-        tMax= Double.parseDouble(temperatureMax);
-//        cMin= Double.parseDouble(cO2Min);
-//        cMax= Double.parseDouble(cO2Max);
-//        hMin= Double.parseDouble(humidityMin);
-//        hMax= Double.parseDouble(humidityMax);
+        if (temperatureMin!=null||!temperatureMin.equals("")){
+            tMin= Double.parseDouble(temperatureMin);
+        }
 
-        initData();
+        if (temperatureMax!=null||!temperatureMax.equals("")){
+            tMax= Double.parseDouble(temperatureMax);
+        }
 
-        compareData();
+        if (cO2Min!=null||!cO2Min.equals("")){
+            cMin= Double.parseDouble(cO2Min);
+        }
+        if (cO2Max!=null||!cO2Max.equals("")){
+            cMax= Double.parseDouble(cO2Max);
+        }
+
+        if (humidityMin!=null||!humidityMin.equals("")){
+            hMin= Double.parseDouble(humidityMin);
+        }
+
+        if (humidityMax!=null||!humidityMax.equals("")){
+            hMax= Double.parseDouble(humidityMax);
+        }
+
+        aV= new AlertValue(tMin, tMax, hMin, hMax, cMin, cMax);
+
+
+        LiveData<AlertValue> alertValueLiveData= setAlertViewModel.getAlert(3);
+        alertValueLiveData.observe(this, new Observer<AlertValue>() {
+            @Override
+            public void onChanged(AlertValue alertValue) {
+                if (alertValue== null){
+                    setAlertViewModel.insertAlert(aV);
+                }else {
+                    aV.setUserId(3);
+                    setAlertViewModel.updateAlert(aV);
+                    initSetting();
+                }
+            }
+        });
+
+//        initData();
+//
+//        compareData();
+    }
+
+    public void initSetting(){
+        LiveData<AlertValue> alertValueLiveData= setAlertViewModel.getAlert(3);
+        alertValueLiveData.observe(this, new Observer<AlertValue>() {
+            @Override
+            public void onChanged(AlertValue alertValue) {
+                if (alertValue== null){
+                    Toast.makeText(getContext(), "something wrong", Toast.LENGTH_LONG).show();
+                }else {
+                    binding.TemperatureMin.setText(alertValue.getTemperatureMinStr());
+                    binding.TemperatureMax.setText(alertValue.getTemperatureMaxStr());
+                    binding.HumidityMin.setText(alertValue.getHumidityMinStr());
+                    binding.HumidityMax.setText(alertValue.getHumidityMaxStr());
+                    binding.CO2Min.setText(alertValue.getCo2MinStr());
+                    binding.CO2Max.setText(alertValue.getCo2MaxStr());
+
+                }
+            }
+        });
+    }
+
+    public void testData(){
+        AlertValue a2= new AlertValue(9,9,9,9,9,9,9);
+        a2.setUserId(1);
+        setAlertViewModel.updateAlert(a2);
+        LiveData<AlertValue> alertValueLiveData= setAlertViewModel.getAlert(1);
+        alertValueLiveData.observe(this, new Observer<AlertValue>() {
+            @Override
+            public void onChanged(AlertValue alertValue) {
+                if (alertValue== null){
+                    Toast.makeText(getContext(), "something wrong", Toast.LENGTH_LONG).show();
+                }else {
+                    Log.e("stq", alertValue.toString());
+                }
+            }
+        });
+
     }
 
     public void initData(){
@@ -97,27 +179,46 @@ public class SetAlertFragment extends Fragment {
 
     public void compareData(){
 
+        String title= "";
+        String text= "";
 
-        if (temperature<=tMin||temperature>=tMax){
-            String s1= String.valueOf(tMin);
-            String s2= String.valueOf(tMax);
-            createNotification(s1+"   "+s2);
+        if (temperature<= tMin){
+            title= "the temperature is too low";
+            text= "The value of temperature is "+temperature;
         }
 
-//        if (c<=cMin||c>=cMax){
-//
-//        }
-//
-//        if (h<=tMin||h>=hMax){
-//
-//        }
+        if (temperature>= tMax){
+            title= "the temperature is too high";
+            text= "The value of temperature is "+temperature;
+        }
+
+        if (humidity<= hMin){
+            title= "the humidity is too low";
+            text= "The value of humidity is "+humidity;
+        }
+
+        if (humidity>= hMax){
+            title= "the humidity is too high";
+            text= "The value of humidity is "+humidity;
+        }
+
+        if (co2<= cMin){
+            title= "the co2 is too low";
+            text= "The value of co2 is "+co2;
+        }
+
+        if (co2>= cMax){
+            title= "the co2 is too high";
+            text= "The value of co2 is "+co2;
+        }
+
 
     }
 
 
 
-    public void createNotification(String contentText){
-        NotificationManager notificationManager = (NotificationManager) Objects.requireNonNull(getActivity()).getSystemService(NOTIFICATION_SERVICE);
+    public void createNotification(String title, String contentText){
+        NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
 
         Notification.Builder builder = new Notification.Builder(getContext());
 
@@ -129,7 +230,7 @@ public class SetAlertFragment extends Fragment {
 
         builder.setSmallIcon(R.drawable.ic_launcher_background);
 
-        builder.setContentTitle("标题");
+        builder.setContentTitle(title);
 
         builder.setAutoCancel(true);
 

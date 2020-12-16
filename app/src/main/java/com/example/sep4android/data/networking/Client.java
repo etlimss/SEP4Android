@@ -19,5 +19,4 @@ public interface Client {
 
     @POST("/createAccount")
     Call<Long> createAccount(@Body User user);
-
 }

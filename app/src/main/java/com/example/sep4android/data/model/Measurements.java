@@ -6,14 +6,10 @@ public class Measurements {
     private double co2;
     private boolean light;
 
-    //private LocalDateTime dateTime;
-//    private Device device;
-
     public Measurements(double temperature, double humidity, double co2) {
         this.temperature = temperature;
         this.humidity = humidity;
         this.co2 = co2;
-
     }
 
     public double getTemperature() {

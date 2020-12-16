@@ -33,8 +33,15 @@ public class ClientRepository {
         return instance;
     }
 
-    public LiveData<User> getCurrentUser() {
+    public LiveData<User> getCurrentUser()
+    {
         return user;
+    }
+
+    public void addRandomUserData()
+    {
+        Log.i("Account","I WAS CALLED!");
+        user.setValue(new User("Heello","world"));
     }
 
     public void signUpAccount(String username, String password){

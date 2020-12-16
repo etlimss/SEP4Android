@@ -22,7 +22,6 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
 
    ActivityMainBinding binding;
-   MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +36,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-
-        mainViewModel= new ViewModelProvider(this).get(MainViewModel.class);
         binding.setLifecycleOwner(this);
-        Measurements measurements= new Measurements(500, 300, 100);
-        mainViewModel.getMeasurementsMutableLiveData().setValue(measurements);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         TextView temperatureData= findViewById(R.id.temperatureData);
         String s= temperatureData.getText().toString();
         Log.e("wjj", s);

@@ -1,19 +1,29 @@
 package com.example.sep4android.viewModel;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class AccountViewModel extends ViewModel {
+import com.example.sep4android.data.model.User;
+import com.example.sep4android.data.networking.ClientRepository;
 
-    private MutableLiveData<String> mText;
+public class AccountViewModel extends AndroidViewModel {
 
-    public AccountViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is account fragment");
+    private ClientRepository clientRepository;
+
+    public AccountViewModel(@NonNull Application application) {
+        super(application);
+        clientRepository= ClientRepository.getInstance();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void getRandomUser()
+    {
+        clientRepository.addRandomUserData();
+    }
+
+    public LiveData<User> getUser() {
+        return clientRepository.getCurrentUser();
     }
 }

@@ -17,9 +17,6 @@ public class SignUpVM extends AndroidViewModel {
         super(application);
         repo = ClientRepository.getInstance();
     }
-    public LiveData<User> getUser() {
-        return repo.getCurrentUser();
-    }
 
     public void signUpAccount(String username, String password){
         repo.signUpAccount(username, password);

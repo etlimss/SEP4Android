@@ -48,8 +48,4 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
             super(binding.getRoot());
         }
     }
-
-    public void intentToDetail(){
-        
-    }
 }

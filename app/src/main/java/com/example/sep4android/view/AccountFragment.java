@@ -8,29 +8,33 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sep4android.R;
+import com.example.sep4android.databinding.FragmentAccountBinding;
+import com.example.sep4android.databinding.FragmentCurrentdataBinding;
 import com.example.sep4android.viewModel.AccountViewModel;
 
 public class AccountFragment extends Fragment {
 
-    private AccountViewModel notificationsViewModel;
+    private AccountViewModel accountViewModel;
+    FragmentAccountBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
+        accountViewModel =
                 new ViewModelProvider(this).get(AccountViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_account, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        binding= DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
+        View root= binding.getRoot();
+        binding.setAccountViewModel(accountViewModel);
+        binding.setLifecycleOwner(this);
+        accountViewModel.getRandomUser();
+
         return root;
     }
 }

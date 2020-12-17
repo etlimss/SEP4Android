@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sep4android.R;
+import com.example.sep4android.data.model.HistoryRequest;
 import com.example.sep4android.data.model.Measurements;
 import com.example.sep4android.viewModel.HistroyViewModel;
 import com.example.sep4android.databinding.FragmentHistroyBinding;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class HistoryFragment extends Fragment {
 
-    private HistroyViewModel dashboardViewModel;
+    private HistroyViewModel histroyViewModel;
     private FragmentHistroyBinding binding;
 
     Spinner locationInHistory;
@@ -34,7 +35,7 @@ public class HistoryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel = new ViewModelProvider(this).get(HistroyViewModel.class);
+        histroyViewModel = new ViewModelProvider(this).get(HistroyViewModel.class);
 //        View root = inflater.inflate(R.layout.fragment_histroy, container, false);
         binding= DataBindingUtil.inflate(inflater, R.layout.fragment_histroy, container, false);
         View root= binding.getRoot();
@@ -42,14 +43,18 @@ public class HistoryFragment extends Fragment {
         binding.setLifecycleOwner(this);
         binding.recycleView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
 
+        //History API doesn't work now
+//        HistoryRequest historyRequest= new HistoryRequest("front", "2020-12-16", "2020-12-17");
+//        histroyViewModel.getHistoryFromServer(historyRequest);
+//        MeasurementsAdapter adapter= new MeasurementsAdapter(histroyViewModel.getListMutableLiveData().getValue());
 
-        List<Measurements> measurementsList= new ArrayList<>();
-        measurementsList.add(new Measurements(1,1,1));
-        measurementsList.add(new Measurements(2,2,2));
-        measurementsList.add(new Measurements(3,3,3));
-        measurementsList.add(new Measurements(4,4,4));
-        measurementsList.add(new Measurements(5,5,5));
-        MeasurementsAdapter adapter= new MeasurementsAdapter(measurementsList);
+        List<Measurements> measurements= new ArrayList<>();
+        measurements.add(new Measurements(1,1,1));
+        measurements.add(new Measurements(2,2,2));
+        measurements.add(new Measurements(3,3,3));
+        measurements.add(new Measurements(4,4,4));
+        measurements.add(new Measurements(5,5,5));
+        MeasurementsAdapter adapter= new MeasurementsAdapter(measurements);
         binding.recycleView.setAdapter(adapter);
 
         locationInHistory = (Spinner)root.findViewById(R.id.locationInHistory);

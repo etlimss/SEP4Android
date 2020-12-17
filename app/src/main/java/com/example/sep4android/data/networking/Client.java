@@ -1,7 +1,10 @@
 package com.example.sep4android.data.networking;
 
+import com.example.sep4android.data.model.HistoryRequest;
 import com.example.sep4android.data.model.Measurements;
 import com.example.sep4android.data.model.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,4 +22,14 @@ public interface Client {
 
     @POST("/createAccount")
     Call<Long> createAccount(@Body User user);
+
+    @GET("/tempHistory")
+    Call<List<Double>> getTempHistory(@Body HistoryRequest body);
+    @GET("/humidityHistory")
+    Call<List<Double>> getHumHistory(@Body HistoryRequest body);
+    @GET("/co2History")
+    Call<List<Double>> getCo2History(@Body HistoryRequest body);
+    @GET("/lightHistory")
+    Call<List<Double>> getLightHistory(@Body HistoryRequest body);
+
 }

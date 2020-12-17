@@ -48,13 +48,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="56dp"
-            android:layout_marginEnd="128dp"
             android:fontFamily="casual"
             android:text="Username:"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/usernameTxtView"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView19"
             app:layout_constraintVertical_bias="0.051" />
@@ -63,12 +60,14 @@
             android:id="@+id/usernameTxtView"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginBottom="156dp"
             android:text="@{String.valueOf(accountViewModel.user.username)}"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20"
+            app:layout_constraintVertical_bias="0.064" />
 
         <TextView
             android:id="@+id/textView19"
@@ -85,15 +84,13 @@
         <TextView
             android:id="@+id/textView20"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="124dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginBottom="68dp"
             android:text="@{String.valueOf(accountViewModel.user.userId)}"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/usernameTxtView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/helloText"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/helloText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

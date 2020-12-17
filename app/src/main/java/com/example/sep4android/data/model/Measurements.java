@@ -6,6 +6,9 @@ public class Measurements {
     private double co2;
     private boolean light;
 
+    public Measurements() {
+    }
+
     public Measurements(double temperature, double humidity, double co2) {
         this.temperature = temperature;
         this.humidity = humidity;

@@ -5,9 +5,12 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.sep4android.data.model.HistoryRequest;
 import com.example.sep4android.data.model.Measurements;
 import com.example.sep4android.data.model.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -19,9 +22,14 @@ public class ClientRepository {
     private static Client client;
     private  MutableLiveData<User> user;
     private  MutableLiveData<Measurements> measurementsMutableLiveData;
+    private MutableLiveData<List<Measurements>> listMutableLiveData;
+    private List<Measurements> measurementsList;
 
     private ClientRepository() {
         measurementsMutableLiveData= new MutableLiveData<>();
+        listMutableLiveData= new MutableLiveData<>();
+        measurementsList= new ArrayList<>();
+        listMutableLiveData.setValue(measurementsList);
         user = new MutableLiveData<>();
         client = ServerGenerator.getClient();
     }
@@ -116,7 +124,84 @@ public class ClientRepository {
 
     }
 
+    public void getHistoryFromServer(HistoryRequest body){
+        Call<List<Double>> tempHistory = client.getTempHistory(body);
+        Call<List<Double>> humHistory = client.getHumHistory(body);
+        Call<List<Double>> co2History = client.getCo2History(body);
+        Call<List<Double>> lightHistory = client.getLightHistory(body);
+        tempHistory.enqueue(new Callback<List<Double>>() {
+            @Override
+            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
+                List<Double> body = response.body();
+                for (Double d: body){
+                    Measurements measurements= new Measurements();
+                    measurements.setTemperature(d);
+                    measurementsList.add(measurements);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Double>> call, Throwable t) {
+                Log.e("getHistoryFromServer", "========================");
+            }
+        });
+
+        humHistory.enqueue(new Callback<List<Double>>() {
+            @Override
+            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
+                List<Double> body = response.body();
+                for (int i=0; i<measurementsList.size();i++){
+                    measurementsList.get(i).setHumidity(body.get(i));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Double>> call, Throwable t) {
+                Log.e("getHistoryFromServer", "========================");
+            }
+        });
+
+        co2History.enqueue(new Callback<List<Double>>() {
+            @Override
+            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
+                List<Double> body = response.body();
+                for (int i=0; i<measurementsList.size();i++){
+                    measurementsList.get(i).setHumidity(body.get(i));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Double>> call, Throwable t) {
+                Log.e("getHistoryFromServer", "========================");
+            }
+        });
+
+        lightHistory.enqueue(new Callback<List<Double>>() {
+            @Override
+            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
+                List<Double> body = response.body();
+                for (int i=0; i<measurementsList.size();i++){
+                    measurementsList.get(i).setHumidity(body.get(i));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Double>> call, Throwable t) {
+                Log.e("getHistoryFromServer", "========================");
+            }
+        });
+
+
+    }
+
+
+
+
     public MutableLiveData<Measurements> getMeasurementsMutableLiveData() {
         return measurementsMutableLiveData;
+    }
+
+    public MutableLiveData<List<Measurements>> getListMutableLiveData() {
+        return listMutableLiveData;
     }
 }

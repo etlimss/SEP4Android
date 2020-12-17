@@ -33,7 +33,7 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MeasurementViewHolder holder, int position) {
-        // binding.setMeasurements(measurementsList.get(position));
+        binding.setMeasurements(measurementsList.get(position));
         binding.executePendingBindings();
     }
 

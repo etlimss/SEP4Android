@@ -143,7 +143,7 @@
                     android:paddingTop="10sp"
                     android:text="@{String.valueOf(currentDataViewModel.measurementsMutableLiveData.humidity)}"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -189,7 +189,7 @@
                     android:paddingTop="10sp"
                     android:text="@{String.valueOf(currentDataViewModel.measurementsMutableLiveData.co2)}"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -235,7 +235,7 @@
                     android:paddingTop="10sp"
                     android:text="@{String.valueOf(currentDataViewModel.measurementsMutableLiveData.light)}"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

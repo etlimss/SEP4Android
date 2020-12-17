@@ -25,7 +25,7 @@ public interface AlertValueDao {
     @Insert
     void insertCo2Alert(Co2Alert co2Alert);
 
-    @Insert
+    @Update
     void updateTemperatureAlert(TemperatureAlert temperatureAlert);
 
     @Update

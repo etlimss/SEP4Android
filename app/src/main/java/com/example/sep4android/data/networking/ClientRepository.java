@@ -18,10 +18,10 @@ public class ClientRepository {
     private static ClientRepository instance;
     private static Client client;
     private  MutableLiveData<User> user;
-    private  MutableLiveData<Measurements> measurements;
+    private  MutableLiveData<Measurements> measurementsMutableLiveData;
 
     private ClientRepository() {
-        measurements= new MutableLiveData<>();
+        measurementsMutableLiveData= new MutableLiveData<>();
         user = new MutableLiveData<>();
         client = ServerGenerator.getClient();
     }
@@ -85,27 +85,38 @@ public class ClientRepository {
     }
 
     public void getMeasurementsFromServer(String location){
-        Client clientAPI = ServerGenerator.getClient();
-        Call<Measurements> call= clientAPI.getMeasurements(location);
-        call.enqueue(new Callback<Measurements>() {
-            @Override
-            public void onResponse(Call<Measurements> call, Response<Measurements> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("Measure", response.body().toString());
-                        measurements.setValue(response.body());
-                    }
-                }
-            }
+//        Client clientAPI = ServerGenerator.getClient();
+//        Call<Measurements> call= clientAPI.getMeasurements(location);
+//        call.enqueue(new Callback<Measurements>() {
+//            @Override
+//            public void onResponse(Call<Measurements> call, Response<Measurements> response) {
+//                if (response.isSuccessful()) {
+//                    if (response.body() != null) {
+//                        Log.i("Measure", response.body().toString());
+//                        measurements.setValue(response.body());
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<Measurements> call, Throwable t) {
+//                Log.e("measurement", "error");
+//            }
+//        });
 
-            @Override
-            public void onFailure(Call<Measurements> call, Throwable t) {
-                Log.e("measurement", "error");
-            }
-        });
+        //Fake data for testing
+        Measurements m1= new Measurements(23.6, 99.9, 1000);
+        Measurements m2= new Measurements(35, 50, 2000);
+        if (location.equals("front")){
+            measurementsMutableLiveData.setValue(m1);
+        }
+
+        if (location.equals("back")){
+            measurementsMutableLiveData.setValue(m2);
+        }
+
     }
 
-    public LiveData<Measurements> getMeasurements() {
-        return measurements;
+    public MutableLiveData<Measurements> getMeasurementsMutableLiveData() {
+        return measurementsMutableLiveData;
     }
 }

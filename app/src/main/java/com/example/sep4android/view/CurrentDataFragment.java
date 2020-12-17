@@ -47,11 +47,9 @@ public class CurrentDataFragment extends Fragment {
     }
 
     public void initSpinner(){
-
         currents = new ArrayList<>();
         currents.add("front");
         currents.add("back");
-
         adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,currents);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         location.setAdapter(adapter);
@@ -62,7 +60,6 @@ public class CurrentDataFragment extends Fragment {
                 Toast.makeText(getContext(), "The selected location is " + adapter.getItem(position), Toast.LENGTH_SHORT).show();
                 currentDataViewModel.getMeasurementsFromServer(adapter.getItem(position));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }

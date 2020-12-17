@@ -9,16 +9,20 @@ import androidx.lifecycle.LiveData;
 import com.example.sep4android.data.AlertModels.Co2Alert;
 import com.example.sep4android.data.AlertModels.HumidityAlert;
 import com.example.sep4android.data.AlertModels.TemperatureAlert;
+import com.example.sep4android.data.model.Measurements;
+import com.example.sep4android.data.networking.ClientRepository;
 import com.example.sep4android.data.repository.AlertRepository;
 
 public class SetAlertViewModel extends AndroidViewModel {
 
     private AlertRepository alertRepository;
+    private ClientRepository clientRepository;
 
 
     public SetAlertViewModel(@NonNull Application application) {
         super(application);
         alertRepository= AlertRepository.getInstance(application);
+        clientRepository= ClientRepository.getInstance();
     }
 
     /*
@@ -74,6 +78,23 @@ public class SetAlertViewModel extends AndroidViewModel {
         alertRepository.addHumidityAlert(humidityAlert);
     }
 
+    // update alerts to the database
+
+    public void updateTemperatureAlert(TemperatureAlert temperatureAlert)
+    {
+        alertRepository.updateTemperatureAlert(temperatureAlert);
+    }
+
+    public void updateCo2Alert(Co2Alert co2Alert)
+    {
+        alertRepository.updateCo2Alert(co2Alert);
+    }
+
+    public void updateHumidityAlert(HumidityAlert humidityAlert)
+    {
+        alertRepository.updateHumidityAlert(humidityAlert);
+    }
+
 
     /* REMOVING METHODS FOR THE ALERTS!!!!!!!!!!!!!!!!!!!!!!! */
     public void removeTemperatureAlert(TemperatureAlert temperatureAlert) {
@@ -86,5 +107,9 @@ public class SetAlertViewModel extends AndroidViewModel {
 
     public void removeCo2Alert(Co2Alert co2Alert) {
         alertRepository.removeCo2Alert(co2Alert);
+    }
+
+    public LiveData<Measurements> getMeasurementsMutableLiveData() {
+        return clientRepository.getMeasurementsMutableLiveData();
     }
 }

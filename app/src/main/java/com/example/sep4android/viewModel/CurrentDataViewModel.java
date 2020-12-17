@@ -20,7 +20,7 @@ public class CurrentDataViewModel extends AndroidViewModel {
     }
 
     public LiveData<Measurements> getMeasurementsMutableLiveData() {
-        return clientRepository.getMeasurements();
+        return clientRepository.getMeasurementsMutableLiveData();
     }
 
     public void getMeasurementsFromServer(String location){

@@ -84,6 +84,23 @@ public class AlertRepository {
         sep4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().insertHumidityAlert(humidityAlert));
     }
 
+    // update alerts to the database
+
+    public void updateTemperatureAlert(TemperatureAlert temperatureAlert)
+    {
+        sep4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().updateTemperatureAlert(temperatureAlert));
+    }
+
+    public void updateCo2Alert(Co2Alert co2Alert)
+    {
+        sep4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().updateCo2Alert(co2Alert));
+    }
+
+    public void updateHumidityAlert(HumidityAlert humidityAlert)
+    {
+        sep4Database.dbWriteExecutor.execute(() -> sep4Database.alertValueDao().updateHumidityAlert(humidityAlert));
+    }
+
 
     /* REMOVING METHODS FOR THE ALERTS!!!!!!!!!!!!!!!!!!!!!!! */
     public void removeTemperatureAlert(TemperatureAlert temperatureAlert) {

@@ -30,49 +30,51 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class ExampleUnitTest {
 
-    @Mock
-    ClientRepository repo;
-
-    @Mock
-    Application app;
-
-    @Rule
-    public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
-
-    @Test
-    public void signinVMTest() {
-        SignUpVM vm = new SignUpVM(app, repo);
-
-        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-
-        vm.getUsername().setValue("test");
-        vm.getPassword().setValue("test");
-
-        vm.signUpAccount();
-
-        verify(repo, times(1)).signUpAccount(captor.capture(), captor.capture());
-
-        List<String> args = captor.getAllValues();
-        assertEquals("test", args.get(0));
-        assertEquals("test", args.get(1));
-    }
 
 
-    @Test
-    public void loginVMTest() {
-        LoginViewModel vm = new LoginViewModel(app, repo);
-
-        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-
-        vm.getUsername().setValue("test");
-        vm.getPassword().setValue("test");
-
-        vm.loginAccount();
-
-        verify(repo, times(1)).loginAccount(captor.capture(), captor.capture());
-
-        List<String> args = captor.getAllValues();
-        assertEquals("test", args.get(0));
-        assertEquals("test", args.get(1));
-    }
+//    @Mock
+//    ClientRepository repo;
+//
+//    @Mock
+//    Application app;
+//
+//    @Rule
+//    public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
+//
+//    @Test
+//    public void signinVMTest() {
+//        SignUpVM vm = new SignUpVM(app, repo);
+//
+//        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+//
+//        vm.getUsername().setValue("test");
+//        vm.getPassword().setValue("test");
+//
+//        vm.signUpAccount();
+//
+//        verify(repo, times(1)).signUpAccount(captor.capture(), captor.capture());
+//
+//        List<String> args = captor.getAllValues();
+//        assertEquals("test", args.get(0));
+//        assertEquals("test", args.get(1));
+//    }
+//
+//
+//    @Test
+//    public void loginVMTest() {
+//        LoginViewModel vm = new LoginViewModel(app, repo);
+//
+//        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+//
+//        vm.getUsername().setValue("test");
+//        vm.getPassword().setValue("test");
+//
+//        vm.loginAccount();
+//
+//        verify(repo, times(1)).loginAccount(captor.capture(), captor.capture());
+//
+//        List<String> args = captor.getAllValues();
+//        assertEquals("test", args.get(0));
+//        assertEquals("test", args.get(1));
+//    }
 }

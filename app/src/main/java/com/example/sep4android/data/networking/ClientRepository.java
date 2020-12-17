@@ -93,34 +93,34 @@ public class ClientRepository {
     }
 
     public void getMeasurementsFromServer(String location){
-//        Client clientAPI = ServerGenerator.getClient();
-//        Call<Measurements> call= clientAPI.getMeasurements(location);
-//        call.enqueue(new Callback<Measurements>() {
-//            @Override
-//            public void onResponse(Call<Measurements> call, Response<Measurements> response) {
-//                if (response.isSuccessful()) {
-//                    if (response.body() != null) {
-//                        Log.i("Measure", response.body().toString());
-//                        measurements.setValue(response.body());
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<Measurements> call, Throwable t) {
-//                Log.e("measurement", "error");
-//            }
-//        });
+        Client clientAPI = ServerGenerator.getClient();
+        Call<Measurements> call= clientAPI.getMeasurements(location);
+        call.enqueue(new Callback<Measurements>() {
+            @Override
+            public void onResponse(Call<Measurements> call, Response<Measurements> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        Log.i("Measure", response.body().toString());
+                        measurementsMutableLiveData.setValue(response.body());
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<Measurements> call, Throwable t) {
+                Log.e("measurement", "error");
+            }
+        });
 
-        //Fake data for testing
-        Measurements m1= new Measurements(23.6, 99.9, 1000);
-        Measurements m2= new Measurements(35, 50, 2000);
-        if (location.equals("front")){
-            measurementsMutableLiveData.setValue(m1);
-        }
-
-        if (location.equals("back")){
-            measurementsMutableLiveData.setValue(m2);
-        }
+//        //Fake data for testing
+//        Measurements m1= new Measurements(23.6, 99.9, 1000);
+//        Measurements m2= new Measurements(35, 50, 2000);
+//        if (location.equals("front")){
+//            measurementsMutableLiveData.setValue(m1);
+//        }
+//
+//        if (location.equals("back")){
+//            measurementsMutableLiveData.setValue(m2);
+//        }
 
     }
 

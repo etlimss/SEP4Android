@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -43,19 +44,15 @@ public class HistoryFragment extends Fragment {
         binding.setLifecycleOwner(this);
         binding.recycleView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
 
-        //History API doesn't work now
-//        HistoryRequest historyRequest= new HistoryRequest("front", "2020-12-16", "2020-12-17");
-//        histroyViewModel.getHistoryFromServer(historyRequest);
-//        MeasurementsAdapter adapter= new MeasurementsAdapter(histroyViewModel.getListMutableLiveData().getValue());
 
-        List<Measurements> measurements= new ArrayList<>();
-        measurements.add(new Measurements(1,1,1));
-        measurements.add(new Measurements(2,2,2));
-        measurements.add(new Measurements(3,3,3));
-        measurements.add(new Measurements(4,4,4));
-        measurements.add(new Measurements(5,5,5));
-        MeasurementsAdapter adapter= new MeasurementsAdapter(measurements);
-        binding.recycleView.setAdapter(adapter);
+        histroyViewModel.getHistoryFromServer("front", "2020-12-16", "2020-12-17");
+        histroyViewModel.getListMutableLiveData().observe(getActivity(), new Observer<List<Measurements>>() {
+            @Override
+            public void onChanged(List<Measurements> measurements) {
+                MeasurementsAdapter adapter= new MeasurementsAdapter(measurements);
+                binding.recycleView.setAdapter(adapter);
+            }
+        });
 
         locationInHistory = root.findViewById(R.id.locationInHistory);
         initSpinner();

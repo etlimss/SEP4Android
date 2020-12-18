@@ -22,8 +22,8 @@ public class HistroyViewModel extends ViewModel {
         return clientRepository.getListMutableLiveData();
     }
 
-    public void getHistoryFromServer(HistoryRequest body){
-        clientRepository.getHistoryFromServer(body);
+    public void getHistoryFromServer(String location, String from, String to){
+        clientRepository.getHistoryFromServer(location, from, to);
     }
 
 }

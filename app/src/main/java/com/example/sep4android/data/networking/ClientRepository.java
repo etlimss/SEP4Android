@@ -23,15 +23,15 @@ public class ClientRepository {
     private  MutableLiveData<User> user;
     private  MutableLiveData<Measurements> measurementsMutableLiveData;
     private MutableLiveData<List<Measurements>> listMutableLiveData;
-    private List<Measurements> measurementsList;
+//    private List<Measurements> measurementsList;
     MutableLiveData<Boolean> isLoggedIn;
     MutableLiveData<Boolean> isAccountCreated;
 
     private ClientRepository() {
         measurementsMutableLiveData= new MutableLiveData<>();
         listMutableLiveData= new MutableLiveData<>();
-        measurementsList= new ArrayList<>();
-        listMutableLiveData.setValue(measurementsList);
+//        measurementsList= new ArrayList<>();
+//        listMutableLiveData.setValue(measurementsList);
         user = new MutableLiveData<>();
         client = ServerGenerator.getClient();
         isLoggedIn = new MutableLiveData<>();
@@ -138,72 +138,82 @@ public class ClientRepository {
 
     }
 
-    public void getHistoryFromServer(HistoryRequest body){
-        Call<List<Double>> tempHistory = client.getTempHistory(body);
-        Call<List<Double>> humHistory = client.getHumHistory(body);
-        Call<List<Double>> co2History = client.getCo2History(body);
-        Call<List<Double>> lightHistory = client.getLightHistory(body);
-        tempHistory.enqueue(new Callback<List<Double>>() {
-            @Override
-            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
-                List<Double> body = response.body();
-                for (Double d: body){
-                    Measurements measurements= new Measurements();
-                    measurements.setTemperature(d);
-                    measurementsList.add(measurements);
-                }
-            }
+    public void getHistoryFromServer(String location, String from, String to){
 
-            @Override
-            public void onFailure(Call<List<Double>> call, Throwable t) {
-                Log.e("getHistoryFromServer", "========================");
-            }
-        });
+        //try to integrate four API to one List<measurement> I want , but have a bug, you need to click the fragment twice
+        //to show the data
+//        Call<List<Double>> tempHistory = client.getTempHistory(location, from, to);
+//        Call<List<Double>> humHistory = client.getHumHistory(location, from, to);
+//        Call<List<Double>> co2History = client.getCo2History(location, from, to);
+//        Call<List<Boolean>> lightHistory = client.getLightHistory(location, from, to);
+//
+//        tempHistory.enqueue(new Callback<List<Double>>() {
+//            @Override
+//            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
+//                List<Double> body = response.body();
+//                Log.e("getHistoryFromServer", String.valueOf(body.get(0)));
+//                for (Double d: body){
+//                    Measurements measurements= new Measurements();
+//                    measurements.setTemperature(d);
+//                    measurementsList.add(measurements);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Double>> call, Throwable t) {
+//                Log.e("getHistoryFromServer", "========================");
+//            }
+//        });
+//
+//        humHistory.enqueue(new Callback<List<Double>>() {
+//            @Override
+//            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
+//                List<Double> body = response.body();
+//                for (int i=0; i<measurementsList.size();i++){
+//                    try {
+//                        measurementsList.get(i).setHumidity(body.get(i));
+//                    }catch (IndexOutOfBoundsException e){
+//                        Log.e("getHistoryFromServer", "IndexOutOfBoundsException");
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Double>> call, Throwable t) {
+//                Log.e("getHistoryFromServer", "========================");
+//            }
+//        });
+//
+//        co2History.enqueue(new Callback<List<Double>>() {
+//            @Override
+//            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
+//                List<Double> body = response.body();
+//                for (int i=0; i<measurementsList.size();i++){
+//                    try {
+//                        measurementsList.get(i).setCo2(body.get(i));
+//                    }catch (IndexOutOfBoundsException e){
+//                        Log.e("getHistoryFromServer", "IndexOutOfBoundsException");
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Double>> call, Throwable t) {
+//                Log.e("getHistoryFromServer", "========================");
+//            }
+//        });
 
-        humHistory.enqueue(new Callback<List<Double>>() {
-            @Override
-            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
-                List<Double> body = response.body();
-                for (int i=0; i<measurementsList.size();i++){
-                    measurementsList.get(i).setHumidity(body.get(i));
-                }
-            }
+        // fake data to replace it
+        List<Measurements> measurements= new ArrayList<>();
+        measurements.add(new Measurements(23.6,100,1000));
+        measurements.add(new Measurements(21,211,250));
+        measurements.add(new Measurements(30,345,365));
+        measurements.add(new Measurements(42,444,487));
+        measurements.add(new Measurements(15,565,598));
+        listMutableLiveData.setValue(measurements);
 
-            @Override
-            public void onFailure(Call<List<Double>> call, Throwable t) {
-                Log.e("getHistoryFromServer", "========================");
-            }
-        });
-
-        co2History.enqueue(new Callback<List<Double>>() {
-            @Override
-            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
-                List<Double> body = response.body();
-                for (int i=0; i<measurementsList.size();i++){
-                    measurementsList.get(i).setHumidity(body.get(i));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Double>> call, Throwable t) {
-                Log.e("getHistoryFromServer", "========================");
-            }
-        });
-
-        lightHistory.enqueue(new Callback<List<Double>>() {
-            @Override
-            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
-                List<Double> body = response.body();
-                for (int i=0; i<measurementsList.size();i++){
-                    measurementsList.get(i).setHumidity(body.get(i));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Double>> call, Throwable t) {
-                Log.e("getHistoryFromServer", "========================");
-            }
-        });
     }
 
 

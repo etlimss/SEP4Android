@@ -28,7 +28,7 @@ public class SetAlertFragment extends Fragment {
     FragmentSetAlertBinding binding;
     Dialog tempDialog, humDialog, co2Dialog;
     EditText tempMin, tempMax, humMin, humMax, co2Min, co2Max;
-    Button btnTemp, btnHum, btnCo2,btnNot;
+    Button btnTemp, btnHum, btnCo2;
     SetAlertViewModel setAlertViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

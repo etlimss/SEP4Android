@@ -6,9 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.sep4android.view.Login.CreateAccount_Fragment;
-import com.example.sep4android.view.Login.Login_Fragment;
-
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     final int pageCount = 2;

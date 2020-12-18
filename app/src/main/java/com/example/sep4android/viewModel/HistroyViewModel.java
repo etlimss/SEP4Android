@@ -18,7 +18,7 @@ public class HistroyViewModel extends ViewModel {
         clientRepository= ClientRepository.getInstance();
     }
 
-    public MutableLiveData<List<Measurements>> getListMutableLiveData() {
+    public LiveData<List<Measurements>> getListMutableLiveData() {
         return clientRepository.getListMutableLiveData();
     }
 

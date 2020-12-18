@@ -57,7 +57,7 @@ public class HistoryFragment extends Fragment {
         MeasurementsAdapter adapter= new MeasurementsAdapter(measurements);
         binding.recycleView.setAdapter(adapter);
 
-        locationInHistory = (Spinner)root.findViewById(R.id.locationInHistory);
+        locationInHistory = root.findViewById(R.id.locationInHistory);
         initSpinner();
 
         return root;

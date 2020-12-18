@@ -3,24 +3,29 @@ package com.example.sep4android.data.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.sep4android.data.AlertModels.Co2Alert;
 import com.example.sep4android.data.AlertModels.HumidityAlert;
 import com.example.sep4android.data.AlertModels.TemperatureAlert;
-import com.example.sep4android.data.model.AlertValue;
+
+import java.util.List;
 
 
 public class AlertRepository {
-    private AlertValueDao alertValueDao;
-    private LiveData<AlertValue> alertValueLiveData;
     private SEP4Database sep4Database;
+    private MutableLiveData<Co2Alert> co2Alert;
+    private MutableLiveData<HumidityAlert> humidityAlert;
+    private MutableLiveData<TemperatureAlert> temperatureAlert;
 
     private static AlertRepository instance;
 
     public AlertRepository(Application application) {
 
+        co2Alert = new MutableLiveData<>();
+        temperatureAlert = new MutableLiveData<>();
+        humidityAlert = new MutableLiveData<>();
         sep4Database= SEP4Database.getInstance(application);
-        alertValueDao= sep4Database.alertValueDao();
     }
 
     public static synchronized AlertRepository getInstance(Application application){
@@ -56,7 +61,7 @@ public class AlertRepository {
      */
     //  Temperature Alerts/Get/Update/Insert
     // GETTING THE ALERT INFO!!!!!!!!!!!!!!!!!!!!!
-    public LiveData<TemperatureAlert> getTemperatureAlert(long userId) {
+    public LiveData<TemperatureAlert> getTemperatureAlert(int userId) {
         return sep4Database.alertValueDao().getTemperatureAlertValue(userId);
     }
     //  Temperature Alerts/Get/Update/Insert
@@ -66,6 +71,10 @@ public class AlertRepository {
     //  Temperature Alerts/Get/Update/Insert
     public LiveData<Co2Alert> getCo2Alert(long userId) {
         return sep4Database.alertValueDao().getCo2AlertValue(userId);
+    }
+    public LiveData<List<TemperatureAlert>> getTempAlert(int userId)
+    {
+        return sep4Database.alertValueDao().getTempAlert(userId);
     }
 
     // ADDING ALERTS TO THE DATABASE !!!!!!!!!!!!!!!!!!!!!

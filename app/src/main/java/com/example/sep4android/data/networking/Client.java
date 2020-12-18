@@ -18,10 +18,10 @@ public interface Client {
     Call<Measurements> getMeasurements(@Query(value="location" , encoded=true) String location);
 
     @POST("/login")
-    Call<User> getUser(@Body User user);
+    Call<Void> getUser(@Body User user);
 
     @POST("/createAccount")
-    Call<Long> createAccount(@Body User user);
+    Call<Void> createAccount(@Body User user);
 
     @GET("/tempHistory")
     Call<List<Double>> getTempHistory(@Body HistoryRequest body);

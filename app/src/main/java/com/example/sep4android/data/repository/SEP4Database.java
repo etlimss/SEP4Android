@@ -9,13 +9,12 @@ import androidx.room.RoomDatabase;
 import com.example.sep4android.data.AlertModels.Co2Alert;
 import com.example.sep4android.data.AlertModels.HumidityAlert;
 import com.example.sep4android.data.AlertModels.TemperatureAlert;
-import com.example.sep4android.data.model.AlertValue;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-@Database(entities={Co2Alert.class, TemperatureAlert.class, HumidityAlert.class}, version = 2, exportSchema = false)
+@Database(entities={Co2Alert.class, TemperatureAlert.class, HumidityAlert.class}, version = 1, exportSchema = false)
 public abstract class SEP4Database extends RoomDatabase {
     private static SEP4Database instance;
     public static final ExecutorService dbWriteExecutor =

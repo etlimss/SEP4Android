@@ -22,4 +22,9 @@ public class SignUpVM extends AndroidViewModel {
         repo.signUpAccount(username, password);
    }
 
+    public LiveData<Boolean> getisAccountCreated()
+    {
+        return repo.getisAccountCreated();
+    }
+
 }

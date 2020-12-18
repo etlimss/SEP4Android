@@ -22,7 +22,7 @@ public class LoginViewModel extends AndroidViewModel {
         repo.loginAccount(username, password);
     }
 
-    public LiveData<User> getCurrentUser() {
-        return repo.getCurrentUser();
+    public LiveData<Boolean> getisUserLoggedIn() {
+        return repo.getisLoggedIn();
     }
 }

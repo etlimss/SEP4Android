@@ -49,8 +49,8 @@ public class SetAlertViewModel extends AndroidViewModel {
     ------------------------------------------------------------------
  */
     //  Temperature Alerts/Get/Update/Insert
-    // GETTING THE ALERT INFO!!!!!!!!!!!!!!!!!!!!!
-    public LiveData<TemperatureAlert> getTemperatureAlert(long userId) {
+
+    public LiveData<TemperatureAlert> getTemperatureAlert(int userId) {
         return alertRepository.getTemperatureAlert(userId);
     }
     //  Temperature Alerts/Get/Update/Insert

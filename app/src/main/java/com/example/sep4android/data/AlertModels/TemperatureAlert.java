@@ -5,8 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "TemperatureAlert")
 public class TemperatureAlert {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
     private int userId;
     private double temperatureMin,temperatureMax;
 
@@ -14,14 +13,6 @@ public class TemperatureAlert {
         this.userId = userId;
         this.temperatureMin = temperatureMin;
         this.temperatureMax = temperatureMax;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getUserId() {
@@ -51,7 +42,6 @@ public class TemperatureAlert {
     @Override
     public String toString() {
         return "TemperatureAlert{" +
-                "id=" + id +
                 ", userId=" + userId +
                 ", temperatureMin=" + temperatureMin +
                 ", temperatureMax=" + temperatureMax +

@@ -10,7 +10,8 @@ import androidx.room.Update;
 import com.example.sep4android.data.AlertModels.Co2Alert;
 import com.example.sep4android.data.AlertModels.HumidityAlert;
 import com.example.sep4android.data.AlertModels.TemperatureAlert;
-import com.example.sep4android.data.model.AlertValue;
+
+import java.util.List;
 
 
 @Dao
@@ -44,13 +45,15 @@ public interface AlertValueDao {
     @Delete
     void deleteHumidityAlert(HumidityAlert humidityAlert);
 
-    @Query("select * from Co2Alert where userId = :userId ")
+    @Query("select * from Co2Alert where userId = :userId LIMIT 1")
     LiveData<Co2Alert> getCo2AlertValue(long userId);
 
-    @Query("select * from TemperatureAlert where userId = :userId ")
-    LiveData<TemperatureAlert> getTemperatureAlertValue(long userId);
+    @Query("SELECT * FROM TemperatureAlert WHERE userId = :userId")
+    LiveData<TemperatureAlert> getTemperatureAlertValue(int userId);
 
-    @Query("select * from HumidityAlert where userId = :userId ")
+    @Query("select * from HumidityAlert where userId = :userId LIMIT 1")
     LiveData<HumidityAlert> getHumidityAlertValue(long userId);
 
+    @Query("SELECT * FROM TemperatureAlert WHERE userId = :userId")
+    LiveData<List<TemperatureAlert>> getTempAlert(int userId);
 }

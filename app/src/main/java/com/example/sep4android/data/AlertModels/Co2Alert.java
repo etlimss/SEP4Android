@@ -5,8 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Co2Alert")
 public class Co2Alert {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+    @PrimaryKey
     public int userId;
     public double co2Min,co2Max;
 
@@ -16,13 +15,6 @@ public class Co2Alert {
         this.co2Max = co2Max;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getUserId() {
         return userId;
@@ -51,7 +43,6 @@ public class Co2Alert {
     @Override
     public String toString() {
         return "Co2Alert{" +
-                "id=" + id +
                 ", userId=" + userId +
                 ", co2Min=" + co2Min +
                 ", co2Max=" + co2Max +

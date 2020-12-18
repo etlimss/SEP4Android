@@ -24,6 +24,8 @@ public class ClientRepository {
     private  MutableLiveData<Measurements> measurementsMutableLiveData;
     private MutableLiveData<List<Measurements>> listMutableLiveData;
     private List<Measurements> measurementsList;
+    MutableLiveData<Boolean> isLoggedIn;
+    MutableLiveData<Boolean> isAccountCreated;
 
     private ClientRepository() {
         measurementsMutableLiveData= new MutableLiveData<>();
@@ -32,6 +34,8 @@ public class ClientRepository {
         listMutableLiveData.setValue(measurementsList);
         user = new MutableLiveData<>();
         client = ServerGenerator.getClient();
+        isLoggedIn = new MutableLiveData<>();
+        isAccountCreated = new MutableLiveData<>();
     }
 
     public static synchronized ClientRepository getInstance(){
@@ -52,19 +56,31 @@ public class ClientRepository {
         user.setValue(new User("Heello","world"));
     }
 
+    public LiveData<Boolean> getisAccountCreated()
+    {
+        return isAccountCreated;
+    }
+
+    public LiveData<Boolean> getisLoggedIn()
+    {
+        return isLoggedIn;
+    }
+
     public void signUpAccount(String username, String password){
         Client clientAPI = ServerGenerator.getClient();
-        Call<Long> userCall = clientAPI.createAccount(new User(username,password));
-        userCall.enqueue(new Callback<Long>() {
+        Call<Void> userCall = clientAPI.createAccount(new User(username,password));
+        userCall.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Long> call, Response<Long> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.i("Retrofit", "Account has been created!");
+                    isAccountCreated.setValue(true);
                 }
             }
             @Override
-            public void onFailure(Call<Long> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.i("Retrofit", "Something went wrong :(");
+                isAccountCreated.setValue(false);
             }
         });
     }
@@ -72,22 +88,20 @@ public class ClientRepository {
     public void loginAccount(String username, String password) {
         Log.i("Retrofit","I WAS CALLED!");
         Client clientAPI = ServerGenerator.getClient();
-        Call<User> call = clientAPI.getUser(new User(username,password));
-        call.enqueue(new Callback<User>() {
+        Call<Void> call = clientAPI.getUser(new User(username,password));
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.i("Retrofit", "We have been successfully logged in!");
-                    if (response.body() != null) {
-                        user.setValue(response.body());
-                    }
+                    isLoggedIn.setValue(true);
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                user = null;
-                Log.i("Retrofit", Objects.requireNonNull(t.getMessage()));
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.i("Retrofit", t.getMessage());
+                isLoggedIn.setValue(false);
             }
         });
     }
@@ -190,18 +204,16 @@ public class ClientRepository {
                 Log.e("getHistoryFromServer", "========================");
             }
         });
-
-
     }
 
 
 
 
-    public MutableLiveData<Measurements> getMeasurementsMutableLiveData() {
+    public LiveData<Measurements> getMeasurementsMutableLiveData() {
         return measurementsMutableLiveData;
     }
 
-    public MutableLiveData<List<Measurements>> getListMutableLiveData() {
+    public LiveData<List<Measurements>> getListMutableLiveData() {
         return listMutableLiveData;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.sep4android.view.Login;
+package com.example.sep4android.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sep4android.R;
@@ -27,11 +29,23 @@ public class CreateAccount_Fragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_create_account, container, false);
 
         signUpVM = new ViewModelProvider(this).get(SignUpVM.class);
-        usernameField = (EditText)v.findViewById(R.id.usernameText);
-        passwordField = (EditText)v.findViewById(R.id.passwordText);
+        usernameField = v.findViewById(R.id.usernameText);
+        passwordField = v.findViewById(R.id.passwordText);
 
-        Button button = (Button) v.findViewById(R.id.btnCreateAccount);
-        button.setOnClickListener(v1 -> signUp(getView()));
+        btnCreateAccount = v.findViewById(R.id.btnCreateAccount);
+        btnCreateAccount.setOnClickListener(v1 -> signUp(getView()));
+        signUpVM.getisAccountCreated().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean == true)
+                {
+                    Toast.makeText(getContext(), "Account was created!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         // Inflate the layout for this fragment
         return v;
     }

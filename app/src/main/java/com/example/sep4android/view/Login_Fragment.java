@@ -1,4 +1,4 @@
-package com.example.sep4android.view.Login;
+package com.example.sep4android.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,18 +31,18 @@ public class Login_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
-        usernameField = (EditText)v.findViewById(R.id.usernameText);
-        passwordField = (EditText)v.findViewById(R.id.passwordText);
+        usernameField = v.findViewById(R.id.usernameText);
+        passwordField = v.findViewById(R.id.passwordText);
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        Button button = (Button) v.findViewById(R.id.btnLogin);
+        Button button = v.findViewById(R.id.btnLogin);
         button.setOnClickListener(v1 -> loginAccount(getView()));
-        loginViewModel.getCurrentUser().observe(getViewLifecycleOwner(),new Observer<User>() {
+        loginViewModel.getisUserLoggedIn().observe(getViewLifecycleOwner(),new Observer<Boolean>() {
             @Override
-            public void onChanged(User user) {
-                if (user == null) {
-                    Toast.makeText(getContext(), "Something went wrong :(", Toast.LENGTH_SHORT).show();
+            public void onChanged(Boolean bl) {
+                if (bl == false) {
+                    Toast.makeText(getContext(), "Credentials are incorrect!", Toast.LENGTH_SHORT).show();
                 } else {
                     intentToSystem();
                 }

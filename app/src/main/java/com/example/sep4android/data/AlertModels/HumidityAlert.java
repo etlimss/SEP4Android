@@ -5,8 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "HumidityAlert")
 public class HumidityAlert {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
     private int userId;
     private double humidityMin,humidityMax;
 
@@ -15,15 +14,6 @@ public class HumidityAlert {
         this.humidityMin = humidityMin;
         this.humidityMax = humidityMax;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getUserId() {
         return userId;
     }
@@ -51,7 +41,6 @@ public class HumidityAlert {
     @Override
     public String toString() {
         return "HumidityAlert{" +
-                "id=" + id +
                 ", userId=" + userId +
                 ", humidityMin=" + humidityMin +
                 ", humidityMax=" + humidityMax +

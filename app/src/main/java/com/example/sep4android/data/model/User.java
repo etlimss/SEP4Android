@@ -9,7 +9,7 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        Random rng = new Random(9999);
+        Random rng = new Random();
         userId = rng.nextInt(10);
     }
 

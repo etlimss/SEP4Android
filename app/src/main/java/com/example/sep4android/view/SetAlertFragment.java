@@ -2,9 +2,11 @@ package com.example.sep4android.view;
 
 import android.app.Dialog;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -394,9 +396,12 @@ public class SetAlertFragment extends Fragment {
 
 
     public void createNotification(String title, String contentText, int id){
+
+
         NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
 
         Notification.Builder builder = new Notification.Builder(getContext());
+
 
         Intent mIntent = new Intent(getContext(), MainActivity.class);
 
@@ -414,6 +419,5 @@ public class SetAlertFragment extends Fragment {
 
         Notification notification = builder.build();
 
-        notificationManager.notify(id, notification);
+        }
     }
-}

@@ -13,6 +13,8 @@ import com.example.sep4android.data.model.Measurements;
 import com.example.sep4android.data.networking.ClientRepository;
 import com.example.sep4android.data.repository.AlertRepository;
 
+import java.util.List;
+
 public class SetAlertViewModel extends AndroidViewModel {
 
     private AlertRepository alertRepository;

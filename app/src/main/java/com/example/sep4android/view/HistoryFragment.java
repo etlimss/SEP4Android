@@ -1,6 +1,8 @@
 package com.example.sep4android.view;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +12,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sep4android.R;
 import com.example.sep4android.data.model.HistoryRequest;
@@ -32,38 +37,35 @@ public class HistoryFragment extends Fragment {
     Spinner locationInHistory;
     List<String> chooseLocation;
     ArrayAdapter<String> adapter;
+    MeasurementsAdapter measurementsAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         histroyViewModel = new ViewModelProvider(this).get(HistroyViewModel.class);
-//        View root = inflater.inflate(R.layout.fragment_histroy, container, false);
+//      View root = inflater.inflate(R.layout.fragment_histroy, container, false);
         binding= DataBindingUtil.inflate(inflater, R.layout.fragment_histroy, container, false);
         View root= binding.getRoot();
 
         binding.setLifecycleOwner(this);
-        binding.recycleView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+        histroyViewModel.getHistoryFromServer("front", "2020-12-16", "2020-12-17");
+        RecyclerView recyclerView= binding.recycleView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
+        histroyViewModel.getListMutableLiveData().observe(getActivity(), new Observer<List<Measurements>>() {
+            @Override
+            public void onChanged(List<Measurements> measurements) {
+                measurementsAdapter= new MeasurementsAdapter(measurements);
+                recyclerView.setAdapter(measurementsAdapter);
+            }
+        });
 
-        //History API doesn't work now
-//        HistoryRequest historyRequest= new HistoryRequest("front", "2020-12-16", "2020-12-17");
-//        histroyViewModel.getHistoryFromServer(historyRequest);
-//        MeasurementsAdapter adapter= new MeasurementsAdapter(histroyViewModel.getListMutableLiveData().getValue());
 
-        List<Measurements> measurements= new ArrayList<>();
-        measurements.add(new Measurements(1,1,1));
-        measurements.add(new Measurements(2,2,2));
-        measurements.add(new Measurements(3,3,3));
-        measurements.add(new Measurements(4,4,4));
-        measurements.add(new Measurements(5,5,5));
-        MeasurementsAdapter adapter= new MeasurementsAdapter(measurements);
-        binding.recycleView.setAdapter(adapter);
+
 
         locationInHistory = (Spinner)root.findViewById(R.id.locationInHistory);
         initSpinner();
 
         return root;
     }
-
-
 
     public void initSpinner(){
 

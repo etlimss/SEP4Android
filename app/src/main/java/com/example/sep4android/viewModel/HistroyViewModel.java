@@ -14,16 +14,23 @@ public class HistroyViewModel extends ViewModel {
 
     private ClientRepository clientRepository;
 
+
     public HistroyViewModel() {
         clientRepository= ClientRepository.getInstance();
+
     }
 
     public MutableLiveData<List<Measurements>> getListMutableLiveData() {
         return clientRepository.getListMutableLiveData();
     }
 
-    public void getHistoryFromServer(HistoryRequest body){
-        clientRepository.getHistoryFromServer(body);
+    public void getHistoryFromServer(String location, String from, String to){
+
+            clientRepository.getHistoryFromServer(location, from, to);
+    }
+
+    public List<Measurements> getMeasurementsList() {
+        return clientRepository.getMeasurementsList();
     }
 
 }

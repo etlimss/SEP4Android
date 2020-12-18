@@ -124,15 +124,17 @@ public class ClientRepository {
 
     }
 
-    public void getHistoryFromServer(HistoryRequest body){
-        Call<List<Double>> tempHistory = client.getTempHistory(body);
-        Call<List<Double>> humHistory = client.getHumHistory(body);
-        Call<List<Double>> co2History = client.getCo2History(body);
-        Call<List<Double>> lightHistory = client.getLightHistory(body);
+    public void getHistoryFromServer(String location, String from, String to){
+        Call<List<Double>> tempHistory = client.getTempHistory(location, from, to);
+        Call<List<Double>> humHistory = client.getHumHistory(location, from, to);
+        Call<List<Double>> co2History = client.getCo2History(location, from, to);
+        Call<List<Boolean>> lightHistory = client.getLightHistory(location, from, to);
+
         tempHistory.enqueue(new Callback<List<Double>>() {
             @Override
             public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
                 List<Double> body = response.body();
+                Log.e("getHistoryFromServer", String.valueOf(body.get(0)));
                 for (Double d: body){
                     Measurements measurements= new Measurements();
                     measurements.setTemperature(d);
@@ -151,7 +153,12 @@ public class ClientRepository {
             public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
                 List<Double> body = response.body();
                 for (int i=0; i<measurementsList.size();i++){
-                    measurementsList.get(i).setHumidity(body.get(i));
+                    try {
+                        measurementsList.get(i).setHumidity(body.get(i));
+                    }catch (IndexOutOfBoundsException e){
+                        Log.e("getHistoryFromServer", "IndexOutOfBoundsException");
+                    }
+
                 }
             }
 
@@ -166,7 +173,12 @@ public class ClientRepository {
             public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
                 List<Double> body = response.body();
                 for (int i=0; i<measurementsList.size();i++){
-                    measurementsList.get(i).setHumidity(body.get(i));
+                    try {
+                        measurementsList.get(i).setCo2(body.get(i));
+                    }catch (IndexOutOfBoundsException e){
+                        Log.e("getHistoryFromServer", "IndexOutOfBoundsException");
+                    }
+
                 }
             }
 
@@ -176,20 +188,6 @@ public class ClientRepository {
             }
         });
 
-        lightHistory.enqueue(new Callback<List<Double>>() {
-            @Override
-            public void onResponse(Call<List<Double>> call, Response<List<Double>> response) {
-                List<Double> body = response.body();
-                for (int i=0; i<measurementsList.size();i++){
-                    measurementsList.get(i).setHumidity(body.get(i));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Double>> call, Throwable t) {
-                Log.e("getHistoryFromServer", "========================");
-            }
-        });
 
 
     }
@@ -203,5 +201,9 @@ public class ClientRepository {
 
     public MutableLiveData<List<Measurements>> getListMutableLiveData() {
         return listMutableLiveData;
+    }
+
+    public List<Measurements> getMeasurementsList() {
+        return measurementsList;
     }
 }

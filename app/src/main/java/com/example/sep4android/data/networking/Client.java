@@ -24,12 +24,12 @@ public interface Client {
     Call<Long> createAccount(@Body User user);
 
     @GET("/tempHistory")
-    Call<List<Double>> getTempHistory(@Body HistoryRequest body);
+    Call<List<Double>> getTempHistory(@Query("location") String location, @Query("from") String from, @Query("to") String to);
     @GET("/humidityHistory")
-    Call<List<Double>> getHumHistory(@Body HistoryRequest body);
+    Call<List<Double>> getHumHistory(@Query("location") String location, @Query("from") String from, @Query("to") String to);
     @GET("/co2History")
-    Call<List<Double>> getCo2History(@Body HistoryRequest body);
+    Call<List<Double>> getCo2History(@Query("location") String location, @Query("from") String from, @Query("to") String to);
     @GET("/lightHistory")
-    Call<List<Double>> getLightHistory(@Body HistoryRequest body);
+    Call<List<Boolean>> getLightHistory(@Query("location") String location, @Query("from") String from, @Query("to") String to);
 
 }
